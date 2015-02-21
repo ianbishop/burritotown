@@ -14,6 +14,9 @@ in_dem_2012_city = in_dem_2012[pd.notnull(in_dem_2012['Geographical classificati
 # Get rid of unnecessary columns
 in_dem_2012_city = in_dem_2012_city.drop(['Coordinate', 'Vector'], 1)
 
+city_name_number = in_dem_2012_city[['GEO', 'Geographical classification']]
+city_name_number = city_name_number.drop_duplicates()
+
 # Set up an array to hold the percent income in each bracket
 income_brackets = ['Inc0to15',
                    'Inc15to25',
@@ -33,7 +36,9 @@ locations = set(in_dem_2012_city['Geographical classification'])
 # Calculate relevant statistics for each city
 location_data = {}
 for location in locations:
-    location_data[location] = {}
+    name = city_name_number[city_name_number['Geographical classification'] == location]
+    name = name['GEO'][2012]
+    location_data[name] = {}
     # Take a subset of data for a given city
     subset = in_dem_2012_city[in_dem_2012_city['Geographical classification'] == location]
     # Get the total number of tax filers in that area
@@ -67,11 +72,17 @@ for location in locations:
             income_percents[income_bracket] = percent
         i += 1
     for k, v in income_percents.iteritems():
-        location_data[location][k] = int(v * taxpayers / 100)
+        location_data[name][k] = int(v * taxpayers / 100)
     age_rows = subset[subset['DON'].str.contains("Percentage of persons aged")]
     age_rows.reset_index(inplace=True)
     j = 0
     for age_bracket in age_brackets:
         percent = float(age_rows.iloc[[j]]['Value'])
-        location_data[location][age_bracket] = int(percent * taxpayers / 100)
+        location_data[name][age_bracket] = int(percent * taxpayers / 100)
         j += 1
+    median_inc = subset[subset['DON'].str.contains("Median employment income, both")]
+    median_inc.reset_index(inplace=True)
+    med_income = float(median_inc['Value'][0])
+    location_data[name]['Median Income'] = med_income
+
+location_dataframe = DataFrame(location_data).T
