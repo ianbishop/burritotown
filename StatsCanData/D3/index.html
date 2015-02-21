@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+
+    <title>D3 Page Template</title>
+
+    <meta name="description" content="" />
+    <meta name="keywords" value="" />
+
+    <link rel="stylesheet" href="css/layout.css" type="text/css" />
+
+    <script src="js/lib/modernizr-1.5.min.js"> </script>
+    <script src="d3/d3.js" type="text/javascript" charset="utf-8" ></script>
+
+    <style type="text/css" media="screen">
+        div.bar {
+            display: inline-block;
+            width: 20px;
+            height: 75px;
+            background-color: teal;
+            margin-right: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1>Let's do this.</h1>
+    </section>
+
+    <script type="text/javascript">
+      var margin = {top: 20, right: 40, bottom: 20, left: 30}
+      var width = 960 - margin.left - margin.right,
+      height = 100 - margin.top - margin.bottom;
+
+      var barPadding = 1;
+      var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+                     11];
+      var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", width)
+                  .attr("height", height);
+      svg.selectAll("rect")
+         .data(dataset)
+         .enter()
+         .append("rect")
+         .attr("x", function(d, i) {
+          return i * (width / dataset.length);
+         })
+         .attr("width", width / dataset.length - barPadding)
+         .attr("height", function(d) {
+          return height;
+         })
+         .attr("fill", function(d) {
+          return "rgb(0, 0, " + (d * 10) + ")";
+         });
+
+      svg.selectAll("text")
+         .data(dataset)
+         .enter()
+         .append("text")
+         .text(function(d) {
+          return d;
+         })
+         .attr("x", function(d, i) {
+          return i * (width / dataset.length) + (width / dataset.length - barPadding) / 2;
+         })
+         .attr("y", function(d) {
+          return height / 2 + 12;
+         })
+         .attr("font-size", "30px")
+         .attr("fill", "white")
+         .attr("text-anchor", "middle");
+    </script>
+
+    </body>
+</html>
