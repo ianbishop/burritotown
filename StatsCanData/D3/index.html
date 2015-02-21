@@ -32,15 +32,30 @@
     <script type="text/javascript">
       var margin = {top: 20, right: 40, bottom: 20, left: 30}
       var width = 960 - margin.left - margin.right,
-      height = 100 - margin.top - margin.bottom;
+      height = 200 - margin.top - margin.bottom;
 
-      var barPadding = 1;
-      var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+      var barPadding = 5;
+      var dataset = [ 5, 19, 21, 25, 22, 18, 15, 13,
                      11];
       var svg = d3.select("body")
                   .append("svg")
                   .attr("width", width)
                   .attr("height", height);
+      var sideLength = width / dataset.length - barPadding
+      var color = d3.scale.quantize()
+        .domain([0, d3.max(dataset)])
+        .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+      colorscale = {"q0-11": "rgb(165,0,38)",
+              "q1-11": "rgb(215,48,39)",
+              "q2-11": "rgb(244,109,67)",
+              "q3-11": "rgb(253,174,97)",
+              "q4-11": "rgb(254,224,139)",
+              "q5-11": "rgb(255,255,191)",
+              "q6-11": "rgb(217,239,139)",
+              "q7-11": "rgb(166,217,106)",
+              "q8-11": "rgb(102,189,99)",
+              "q9-11": "rgb(26,152,80)",
+              "q10-11": "rgb(0,104,55)"}
       svg.selectAll("rect")
          .data(dataset)
          .enter()
@@ -48,12 +63,10 @@
          .attr("x", function(d, i) {
           return i * (width / dataset.length);
          })
-         .attr("width", width / dataset.length - barPadding)
-         .attr("height", function(d) {
-          return height;
-         })
+         .attr("width", sideLength)
+         .attr("height", sideLength)
          .attr("fill", function(d) {
-          return "rgb(0, 0, " + (d * 10) + ")";
+          return colorscale[color(d)];
          });
 
       svg.selectAll("text")
@@ -67,9 +80,9 @@
           return i * (width / dataset.length) + (width / dataset.length - barPadding) / 2;
          })
          .attr("y", function(d) {
-          return height / 2 + 12;
+          return sideLength / 2 + 20;
          })
-         .attr("font-size", "30px")
+         .attr("font-size", "50px")
          .attr("fill", "white")
          .attr("text-anchor", "middle");
     </script>
