@@ -1,91 +1,78 @@
 (ns yalp.cities)
 
 (def cities
-  {"Charlottetown" 42602
-   "Hamilton" 670580
-   "Grande Prairie" 54913
-   "Shawinigan" 47735
-   "Saint-Hyacinthe" 48576
-   "Prince Albert" 35552
-   "Kitchener" 444681
-   "Fredericton" 61522
-   "Oshawa" 290937
-   "Brandon" 46061
-   "Georgetown" 40150
-   "Woodstock" 37362
-   "Orillia" 30586
-   "Guelph" 122362
-   "Vancouver" 2135201
-   "Sudbury" 106840
-   "Abbotsford" 149855
-   "Penticton" 36902
-   "Chilliwack" 66382
-   "Stratford" 30886
-   "Victoria" 316327
-   "St. Thomas" 41688
-   "Sherbrooke" 140628
-   "Medicine Hat" 65671
-   "Peterborough" 80660
-   "Rimouski" 37664
-   "Moncton" 107086
-   "Sault Ste. Marie" 67646
-   "Kingston" 117787
-   "Saint John" 95902
-   "Lethbridge" 83679
-   "St. Catharines - Niagara" 309319
-   "Chicoutimi - JonquiËre" 106666
-   "Windsor" 276165
-   "Regina" 192756
-   "Vernon" 44600
-   "Drummondville" 66314
-   "Winnipeg" 671551
-   "Courtenay" 40809
-   "Thunder Bay" 102222
-   "Sarnia" 79526
-   "Cape Breton - Sydney" 31597
-   "Toronto" 5132794
-   "Edmonton" 960015
-   "Calgary" 1095404
-   "Ch‚teaugua" 70812
-   "White Rock" 82368
-   "Fort McMurray" 61374
-   "Airdrie" 42564
-   "Timmins" 30614
-   "London" 366191
-   "Kanata" 101760
-   "Moose Jaw" 33617
-   "Milton" 75573
-   "Granby" 60281
-   "Chatham" 44074
-   "Brantford" 93650
-   "Sorel" 36969
-   "Midland" 31428
-   "Joliette" 42883
-   "Saskatoon" 222035
-   "QuÈbec" 696946
-   "Belleville" 63985
-   "Campbell River" 34514
-   "Red Deer" 90207
-   "MontrÈal" 3407963
-   "Leamington" 31254
-   "Ottawa - Gatineau" 697267
-   "Barrie" 166634
-   "Saint-JÈrÙme" 65825
-   "Orangeville" 30729
-   "Kelowna" 141767
-   "Bowmanville - Newcastle" 43555
-   "St. John's" 165346
-   "Cornwall" 49243
-   "Nanaimo" 88799
-   "Victoriaville" 41701
-   "Trois-RiviËres" 126460
-   "North Bay" 53515
-   "Saint-Jean-sur-Richelieu" 83053
-   "Halifax" 297943
-   "Salaberry-de-Valleyfield" 39391
-   "Beloeil" 50796
-   "Kamloops" 73472
-   "Prince George" 65503})
+  {"Abbotsford" {:population 149855}
+   "Barrie" {:population 166634}
+   "Belleville" {:population 63985}
+   "Brandon" {:population 46061}
+   "Brantford" {:population 93650}
+   "Calgary" {:population 1095404}
+   "Campbell River" {:population 34514}
+   "Cape Breton - Sydney" {:population 31597}
+   "Charlottetown" {:population 42602}
+   "Chatham" {:population 44074}
+   "Chilliwack" {:population 66382}
+   "Cornwall" {:population 49243}
+   "Courtenay" {:population 40809}
+   "Drummondville" {:population 66314}
+   "Edmonton" {:population 960015}
+   "Fredericton" {:population 61522}
+   "Granby" {:population 60281}
+   "Grande Prairie" {:population 54913}
+   "Guelph" {:population 122362}
+   "Halifax" {:population 297943}
+   "Hamilton" {:population 670580}
+   "Joliette" {:population 42883}
+   "Kamloops" {:population 73472}
+   "Kelowna" {:population 141767}
+   "Kingston" {:population 117787}
+   "Kitchener" {:population 444681}
+   "Leamington" {:population 31254}
+   "Lethbridge" {:population 83679}
+   "London" {:population 366191}
+   "Medicine Hat" {:population 65671}
+   "Midland" {:population 31428}
+   "Moncton" {:population 107086}
+   "MontrÈal" {:population 3407963}
+   "Moose Jaw" {:population 33617}
+   "Nanaimo" {:population 88799}
+   "North Bay" {:population 53515}
+   "Orillia" {:population 30586}
+   "Oshawa" {:population 290937}
+   "Ottawa - Gatineau" {:population 697267}
+   "Penticton" {:population 36902}
+   "Peterborough" {:population 80660}
+   "Prince Albert" {:population 35552}
+   "Prince George" {:population 65503}
+   "QuÈbec" {:population 696946}
+   "Red Deer" {:population 90207}
+   "Regina" {:population 192756}
+   "Rimouski" {:population 37664}
+   "Saint John" {:population 95902}
+   "Saint-Hyacinthe" {:population 48576}
+   "Saint-Jean-sur-Richelieu" {:population 83053}
+   "Salaberry-de-Valleyfield" {:population 39391}
+   "Sarnia" {:population 79526}
+   "Saskatoon" {:population 222035}
+   "Sault Ste. Marie" {:population 67646}
+   "Shawinigan" {:population 47735}
+   "Sherbrooke" {:population 140628}
+   "Sorel" {:population 36969}
+   "St. Catharines - Niagara" {:population 309319}
+   "St. John's" {:population 165346}
+   "Stratford" {:population 30886}
+   "Sudbury" {:population 106840}
+   "Thunder Bay" {:population 102222}
+   "Timmins" {:population 30614}
+   "Toronto" {:population 5132794}
+   "Trois-RiviËres" {:population 126460}
+   "Vancouver" {:population 2135201}
+   "Vernon" {:population 44600}
+   "Victoria" {:population 316327}
+   "Victoriaville" {:population 41701}
+   "Windsor" {:population 276165}
+   "Winnipeg" {:population 671551}
+   "Woodstock" {:population 37362}})
 
 (defn dist [x y]
   (Math/abs (- x y)))
