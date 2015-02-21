@@ -19,4 +19,9 @@
              {}
              categories))
 
-
+(defn city-comp
+  [city1 pop1 city2 pop2]
+  (reduce-kv (fn [a label value]
+               (let [other-val (or (get city2 label) 0)]
+                 (conj a [label (- (/ (or value 0) pop1) (/ other-val pop2))])))
+             [] city1))
