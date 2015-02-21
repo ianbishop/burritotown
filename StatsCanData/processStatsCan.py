@@ -73,12 +73,14 @@ for location in locations:
         i += 1
     for k, v in income_percents.iteritems():
         location_data[name][k] = int(v * taxpayers / 100)
+        location_data[name][k + 'percent'] = v
     age_rows = subset[subset['DON'].str.contains("Percentage of persons aged")]
     age_rows.reset_index(inplace=True)
     j = 0
     for age_bracket in age_brackets:
         percent = float(age_rows.iloc[[j]]['Value'])
         location_data[name][age_bracket] = int(percent * taxpayers / 100)
+        location_data[name][age_bracket + 'percent'] = v
         j += 1
     # Add a column for the median income for each town and city
     median_inc = subset[subset['DON'].str.contains("Median employment income, both")]

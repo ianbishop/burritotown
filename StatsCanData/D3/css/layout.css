@@ -1,0 +1,13 @@
+@import "reset.css";
+
+body {
+    font-family: Arial;
+    width: 65%;
+    margin: 60px auto;
+    line-height: 1.2;
+}
+
+h1 {
+  font-size: 200%;
+  margin-bottom: 0.7em;
+}
