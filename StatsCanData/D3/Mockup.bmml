@@ -167,7 +167,7 @@
         <text>17</text>
       </controlProperties>
     </control>
-    <control controlID="38" controlTypeID="com.balsamiq.mockups::Paragraph" x="419" y="981" w="859" h="71" measuredW="275" measuredH="80" zOrder="32" locked="false" isInGroup="-1">
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Paragraph" x="419" y="974" w="859" h="71" measuredW="275" measuredH="80" zOrder="32" locked="false" isInGroup="-1">
       <controlProperties>
         <size>24</size>
         <text>Accounting%20for%20scale%2C%20we%27d%20expect%20Fredericton%20to%20be%20able%20to%20support%20up%20to%20*2%20more%20burrito%20restaurants*.</text>
@@ -200,5 +200,44 @@
         <text/>
       </controlProperties>
     </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Title" x="419" y="1370" w="-1" h="-1" measuredW="588" measuredH="27" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>24</size>
+        <text>How%20do%20the%20demographics%20of%20Fredericton%20Compare%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::TextArea" x="545" y="1453" w="159" h="81" measuredW="200" measuredH="140" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>16777215</borderColor>
+        <size>72</size>
+        <text>45</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::Title" x="559" y="1426" w="-1" h="-1" measuredW="130" measuredH="27" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Median%20Age</text>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::TextArea" x="930" y="1453" w="267" h="81" measuredW="200" measuredH="140" zOrder="41" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>16777215</borderColor>
+        <size>72</size>
+        <text>72%2C000</text>
+      </controlProperties>
+    </control>
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Title" x="982" y="1426" w="-1" h="-1" measuredW="166" measuredH="27" zOrder="42" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Median%20Income</text>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Canvas" x="419" y="1534" w="416" h="28" measuredW="100" measuredH="70" zOrder="43" locked="false" isInGroup="-1"/>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Canvas" x="855" y="1534" w="416" h="28" measuredW="100" measuredH="70" zOrder="44" locked="false" isInGroup="-1"/>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::VRule" x="695" y="1526" w="-1" h="44" measuredW="10" measuredH="100" zOrder="45" locked="false" isInGroup="-1"/>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::VRule" x="1090" y="1526" w="-1" h="44" measuredW="10" measuredH="100" zOrder="46" locked="false" isInGroup="-1"/>
   </controls>
 </mockup>
