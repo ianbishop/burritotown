@@ -1,81 +1,224 @@
 (ns yalp.cities)
 
 (def cities
-  {"Abbotsford" {:population 149855}
-   "Barrie" {:population 166634}
-   "Belleville" {:population 63985}
-   "Brandon" {:population 46061}
-   "Brantford" {:population 93650}
-   "Calgary" {:population 1095404}
-   "Campbell River" {:population 34514}
-   "Cape Breton - Sydney" {:population 31597}
-   "Charlottetown" {:population 42602}
-   "Chatham" {:population 44074}
-   "Chilliwack" {:population 66382}
-   "Cornwall" {:population 49243}
-   "Courtenay" {:population 40809}
-   "Drummondville" {:population 66314}
-   "Edmonton" {:population 960015}
-   "Fredericton" {:population 61522}
-   "Granby" {:population 60281}
-   "Grande Prairie" {:population 54913}
-   "Guelph" {:population 122362}
-   "Halifax" {:population 297943}
-   "Hamilton" {:population 670580}
-   "Joliette" {:population 42883}
-   "Kamloops" {:population 73472}
-   "Kelowna" {:population 141767}
-   "Kingston" {:population 117787}
-   "Kitchener" {:population 444681}
-   "Leamington" {:population 31254}
-   "Lethbridge" {:population 83679}
-   "London" {:population 366191}
-   "Medicine Hat" {:population 65671}
-   "Midland" {:population 31428}
-   "Moncton" {:population 107086}
-   "MontrÈal" {:population 3407963}
-   "Moose Jaw" {:population 33617}
-   "Nanaimo" {:population 88799}
-   "North Bay" {:population 53515}
-   "Orillia" {:population 30586}
-   "Oshawa" {:population 290937}
-   "Ottawa - Gatineau" {:population 697267}
-   "Penticton" {:population 36902}
-   "Peterborough" {:population 80660}
-   "Prince Albert" {:population 35552}
-   "Prince George" {:population 65503}
-   "QuÈbec" {:population 696946}
-   "Red Deer" {:population 90207}
-   "Regina" {:population 192756}
-   "Rimouski" {:population 37664}
-   "Saint John" {:population 95902}
-   "Saint-Hyacinthe" {:population 48576}
-   "Saint-Jean-sur-Richelieu" {:population 83053}
-   "Salaberry-de-Valleyfield" {:population 39391}
-   "Sarnia" {:population 79526}
-   "Saskatoon" {:population 222035}
-   "Sault Ste. Marie" {:population 67646}
-   "Shawinigan" {:population 47735}
-   "Sherbrooke" {:population 140628}
-   "Sorel" {:population 36969}
-   "St. Catharines - Niagara" {:population 309319}
-   "St. John's" {:population 165346}
-   "Stratford" {:population 30886}
-   "Sudbury" {:population 106840}
-   "Thunder Bay" {:population 102222}
-   "Timmins" {:population 30614}
-   "Toronto" {:population 5132794}
-   "Trois-RiviËres" {:population 126460}
-   "Vancouver" {:population 2135201}
-   "Vernon" {:population 44600}
-   "Victoria" {:population 316327}
-   "Victoriaville" {:population 41701}
-   "Windsor" {:population 276165}
-   "Winnipeg" {:population 671551}
-   "Woodstock" {:population 37362}})
+  {"Abbotsford" {:age 38
+                 :population 149855
+                 :income 26710}
+   "Barrie" {:age 38
+             :population 166634
+             :income 33140}
+   "Belleville" {:age 41
+                 :population 63985
+                 :income 28320}
+   "Brandon" {:age 37
+              :population 46061
+              :income 31000}
+   "Brantford" {:age 39
+                :population 93650
+                :income 31100}
+   "Calgary" {:age 36
+              :population 1095404
+              :income 41970}
+   "Campbell River" {:age 42
+                     :population 34514
+                     :income 26550}
+   "Cape Breton - Sydney" {:age 43
+                           :population 31597
+                           :income 25470}
+   "Charlottetown" {:age 40
+                    :population 42602
+                    :income 28010}
+   "Chatham" {:age 41
+              :population 44074
+              :income 25080}
+   "Chilliwack" {:age 40
+                 :population 66382
+                 :income 26480}
+   "Cornwall" {:age 42
+               :population 49243
+               :income 26700}
+   "Courtenay" {:age 45
+                :population 40809
+                :income 22470}
+   "Drummondville" {:age 40
+                    :population 66314
+                    :income 27700}
+   "Edmonton" {:age 37
+               :population 960015
+               :income 42440}
+   "Fredericton" {:age 39
+                  :population 61522
+                  :income 32660}
+   "Granby" {:age 41
+             :population 60281
+             :income 28230}
+   "Grande Prairie" {:age 32
+                     :population 54913
+                     :income 46050}
+   "Guelph" {:age 39
+             :population 122362
+             :income 36770}
+   "Halifax" {:age 40
+              :population 297943
+              :income 33400}
+   "Hamilton" {:age 40
+               :population 670580
+               :income 33690}
+   "Joliette" {:age 43
+               :population 42883
+               :income 28110}
+   "Kamloops" {:age 41
+               :population 73472
+               :income 31300}
+   "Kelowna" {:age 42
+              :population 141767
+              :income 28000}
+   "Kingston" {:age 41
+               :population 117787
+               :income 32110}
+   "Kitchener" {:age 38
+                :population 444681
+                :income 35200}
+   "Leamington" {:age 39
+                 :population 31254
+                 :income 21470}
+   "Lethbridge" {:age 37
+                 :population 83679
+                 :income 32340}
+   "London" {:age 39
+             :population 366191
+             :income 31470}
+   "Medicine Hat" {:age 39
+                   :population 65671
+                   :income 35070}
+   "Midland" {:age 43
+              :population 31428
+              :income 27390}
+   "Moncton" {:age 40
+              :population 107086
+              :income 30960}
+   "MontrÈal" {:age 39
+               :population 3407963
+               :income 30760}
+   "Moose Jaw" {:age 40
+                :population 33617
+                :income 34010}
+"Nanaimo" {:age 43
+           :population 88799
+           :income 26190}
+"North Bay" {:age 41
+             :population 53515
+             :income 31440}
+"Orillia" {:age 43
+           :population 30586
+           :income 26350}
+"Oshawa" {:age 38
+          :population 290937
+          :income 36110}
+"Ottawa - Gatineau" {:age 39
+                     :population 697267
+                     :income 40300}
+"Penticton" {:age 46
+             :population 36902
+             :income 23200}
+"Peterborough" {:age 42
+                :population 80660
+                :income 27730}
+"Prince Albert" {:age 36
+                 :population 35552
+                 :income 32640}
+"Prince George" {:age 38
+                 :population 65503
+                 :income 35120}
+"QuÈbec" {:age 41
+          :population 696946
+          :income 33880}
+"Red Deer" {:age 35
+            :population 90207
+            :income 38250}
+"Regina" {:age 37
+          :population 192756
+          :income 39600}
+"Rimouski" {:age 43
+            :population 37664
+            :income 29480}
+"Saint John" {:age 40
+              :population 95902
+              :income 31710}
+"Saint-Hyacinthe" {:age 43
+                   :population 48576
+                   :income 28660}
+"Saint-Jean-sur-Richelieu" {:age 40
+                            :population 83053
+                            :income 31530}
+"Salaberry-de-Valleyfield" {:age 42
+                            :population 39391
+                            :income 28900}
+"Sarnia" {:age 37
+          :population 79526
+          :income 37070}
+"Saskatoon" {:age 42
+             :population 222035
+             :income 27690}
+"Sault Ste. Marie" {:age 46
+                    :population 67646
+                    :income 24570}
+"Shawinigan" {:age 41
+              :population 47735
+              :income 28330}
+"Sherbrooke" {:age 45
+              :population 14062836969
+              :income 29630}
+"St. Catharines - Niagara" {:age 42
+                            :population 309319
+                            :income 26130}
+"St. John's" {:age 39
+              :population 165346
+              :income 37210}
+"Stratford" {:age 42
+             :population 30886
+             :income 31860}
+"Sudbury" {:age 40
+           :population 106840
+           :income 34530}
+"Thunder Bay" {:age 41
+               :population 102222
+               :income 34080}
+"Timmins" {:age 39
+           :population 30614
+           :income 35660}
+"Toronto" {:age 38
+           :population 5132794
+           :income 32670}
+"Trois-RiviËres" {:age 43
+                  :population 126460
+                  :income 27680}
+"Vancouver" {:age 40
+             :population 2135201
+             :income 30650}
+"Vernon" {:age 44
+          :population 44600
+          :income 25680}
+"Victoria" {:age 43
+            :population 316327
+            :income 30170}
+"Victoriaville" {:age 42
+                 :population 41701
+                 :income 26950}
+"Windsor" {:age 39
+           :population 276165
+           :income 28350}
+"Winnipeg" {:age 39
+            :population 671551
+            :income 33090}
+"Woodstock" {:age 40
+             :population 37362
+             :income 33590}})
 
 (defn dist [x y]
-  (Math/abs (- x y)))
+  (Math/sqrt (+ (Math/pow (- (:age x) (:age y)) 2)
+                (Math/pow (- (:population x) (:population y)) 2)
+                (Math/pow (- (:income x) (:income y)) 2))))
 
 (reduce-kv (fn [a k v]
              (let [distances (reduce-kv (fn [a2 k2 v2]
