@@ -1,0 +1,87 @@
+Airdrie 	42564
+Barrie 	166634
+Belleville 	63985
+Beloeil 	50796
+Bowmanville - Newcastle 	43555
+Brandon 	46061
+Brantford 	93650
+Calgary 	1095404
+Campbell River 	34514
+Charlottetown 	42602
+Chatham 	44074
+Chicoutimi - JonquiËre 	106666
+Chilliwack 	66382
+Cornwall 	49243
+Courtenay 	40809
+Drummondville 	66314
+Edmonton 	960015
+Fort McMurray 	61374
+Fredericton 	61522
+Georgetown 	40150
+Granby 	60281
+Grande Prairie 	54913
+Guelph 	122362
+Halifax 	297943
+Hamilton 	670580
+Joliette 	42883
+Kamloops 	73472
+Kanata 	101760
+Kelowna 	141767
+Kingston 	117787
+Kitchener 	444681
+Leamington 	31254
+Lethbridge 	83679
+London 	366191
+Medicine Hat 	65671
+Midland 	31428
+Milton 	75573
+Moncton 	107086
+MontrÈal 	3407963
+Moose Jaw 	33617
+Nanaimo 	88799
+North Bay 	53515
+Orangeville 	30729
+Orillia 	30586
+Oshawa 	290937
+Ottawa - Gatineau 	933596
+Ottawa - Gatineau 	236329
+Ottawa - Gatineau 	697267
+Penticton 	36902
+Peterborough 	80660
+Prince Albert 	35552
+Prince George 	65503
+QuÈbec 	696946
+Red Deer 	90207
+Regina 	192756
+Rimouski 	37664
+Saint John 	95902
+Sarnia 	79526
+Saskatoon 	222035
+Sault Ste. Marie 	67646
+Shawinigan 	47735
+Sherbrooke 	140628
+Sorel 	36969
+St. Catharines - Niagara 	309319
+St. John's 	165346
+St. Thomas 	41688
+Saint-Hyacinthe 	48576
+Saint-Jean-sur-Richelieu 	83053
+Saint-JÈrÙme 	65825
+Stratford 	30886
+Sudbury 	106840
+Cape Breton - Sydney 	31597
+Thunder Bay 	102222
+Toronto 	5132794
+Trois-RiviËres 	126460
+Salaberry-de-Valleyfield 	39391
+Vancouver 	2135201
+Vernon 	44600
+Victoria 	316327
+Victoriaville 	41701
+White Rock 	82368
+Windsor 	276165
+Winnipeg 	671551
+Woodstock 	37362
+Abbotsford 	149855
+Timmins 	30614
+Ch‚teauguay	70812
