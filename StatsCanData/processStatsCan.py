@@ -80,9 +80,17 @@ for location in locations:
         percent = float(age_rows.iloc[[j]]['Value'])
         location_data[name][age_bracket] = int(percent * taxpayers / 100)
         j += 1
+    # Add a column for the median income for each town and city
     median_inc = subset[subset['DON'].str.contains("Median employment income, both")]
     median_inc.reset_index(inplace=True)
-    med_income = float(median_inc['Value'][0])
-    location_data[name]['Median Income'] = med_income
+    income = float(median_inc['Value'][0])
+    location_data[name]['Median Income'] = income
+
+    # Add a column for median age
+    median_age = subset[subset['DON'].str.contains("Average age of persons")]
+    median_age.reset_index(inplace=True)
+    age = float(median_age['Value'][0])
+    location_data[name]['Median Age'] = age
 
 location_dataframe = DataFrame(location_data).T
+location_dataframe.to_csv(path_or_buf="./CityData.csv")
