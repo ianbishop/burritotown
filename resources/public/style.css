@@ -1,5 +1,5 @@
 html {
-    background-color: #a0bdbc;
+    background-color: 'white';
 }
 
 p {
@@ -26,4 +26,18 @@ div.search-bar {
 
 div.trivia {
     margin-bottom: 2em;
+}
+
+#cities {
+    width: 100%;
+    font-size: 20px;
+}
+
+.pure-button-primary {
+    display: block;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 0.5em 1em;
+    padding-top: 0.6em;
+    font-size: 1.5em;
 }

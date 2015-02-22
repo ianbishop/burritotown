@@ -94,31 +94,31 @@
 (defn api-routes
   [city-data]
   (routes
-    (context "/city/:city" [city]
+    (context "/city/:city-name" [city-name]
       (GET "/" []
-        (found [city (merge (get cities city)
-                            (get city-data city))]
-          (json-wrapper city)))
+        (found [city (merge (get cities city-name)
+                            (get city-data city-name))]
+          (json-wrapper (assoc city "name" city-name))))
       (GET "/similar" []
-        (found [_ (get cities city)]
-          (if-let [cached (get @cache (str "similar/" city))]
+        (found [_ (get cities city-name)]
+          (if-let [cached (get @cache (str "similar/" city-name))]
             (json-wrapper cached)
-            (let [similar (cities/similar city)]
-              (swap! cache assoc (str "similar/" city) {:similar similar})
+            (let [similar (cities/similar city-name)]
+              (swap! cache assoc (str "similar/" city-name) {:similar similar})
               (json-wrapper {:similar similar})))))
       (GET "/compare/:category/:other" [category other]
-        (found [_ (get cities city)]
+        (found [_ (get cities city-name)]
           (found [_ (get cities other)]
             (found [subcats (get categories (keyword category))]
-              (if-let [cached (get @cache (format "%s/compare/%s/%s" city category other))]
+              (if-let [cached (get @cache (format "%s/compare/%s/%s" city-name category other))]
                 (json-wrapper cached)
-                (let [c1 (cats-for-city city subcats)
+                (let [c1 (cats-for-city city-name subcats)
                       c2 (cats-for-city other subcats)
                       c1c2comp (city-comp c1
-                                          (get-in cities [city :population])
+                                          (get-in cities [city-name :population])
                                           c2
-                                          (get-in cities [city :population]))]
-                  (swap! cache assoc (format "%s/compare/%s/%s" city category other) c1c2comp)
+                                          (get-in cities [other :population]))]
+                  (swap! cache assoc (format "%s/compare/%s/%s" city-name category other) c1c2comp)
                   (json-wrapper c1c2comp))))))))))
 
 (defn app
