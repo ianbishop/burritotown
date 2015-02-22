@@ -14,8 +14,8 @@ function getSimilars(city) {
 $("#city-picker #submit").click(function(e) {
     var city = $("#cities option:selected").text();
     var majors = [city, "Vancouver", "Montreal", "Toronto"];
-    var results = [];
     _.each(majors, function(v) {
+        var results = [];
         var path = "/city/" + v;
         $.getJSON(path, function(data) {
             results.push(data);
