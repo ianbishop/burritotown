@@ -1,5 +1,5 @@
 import pandas as pd
-# from pandas import Series
+from pandas import Series
 from pandas import DataFrame
 # import numpy as np
 
@@ -16,6 +16,9 @@ in_dem_2012_city = in_dem_2012_city.drop(['Coordinate', 'Vector'], 1)
 
 city_name_number = in_dem_2012_city[['GEO', 'Geographical classification']]
 city_name_number = city_name_number.drop_duplicates()
+cities = Series([i.split(',', 1)[0] for i in city_name_number['GEO'].tolist()])
+city_name_number = city_name_number.reset_index()
+city_name_number['GEO'] = cities
 
 # Set up an array to hold the percent income in each bracket
 income_brackets = ['Inc0to15',
@@ -37,7 +40,8 @@ locations = set(in_dem_2012_city['Geographical classification'])
 location_data = {}
 for location in locations:
     name = city_name_number[city_name_number['Geographical classification'] == location]
-    name = name['GEO'][2012]
+    name = name['GEO'].reset_index()
+    name = name['GEO'][0]
     location_data[name] = {}
     # Take a subset of data for a given city
     subset = in_dem_2012_city[in_dem_2012_city['Geographical classification'] == location]
