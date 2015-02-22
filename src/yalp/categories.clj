@@ -448,5 +448,4 @@
 :poolbilliards "Pool & Billiards"
 :stucco "Stucco Services"
 :knittingsupplies "Knitting Supplies"
-:gardeners "Gardeners"
-})
+:gardeners "Gardeners"})

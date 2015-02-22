@@ -4,9 +4,7 @@
   {"Abbotsford" {:age 38 :population 149855 :income 26710}
    "Barrie" {:age 38 :population 166634 :income 33140}
    "Belleville" {:age 41 :population 63985 :income 28320}
-   "Brandon" {:age 37
-              :population 46061
-              :income 31000}
+   "Brandon" {:age 37 :population 46061 :income 31000}
    "Brantford" {:age 39
                 :population 93650
                 :income 31100}

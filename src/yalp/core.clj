@@ -75,13 +75,14 @@
    :headers headers
    :body body})
 
-(defn json-wrapper
+(defmacro json-wrapper
   [& body]
   (let [[status body] (if (number? (first body))
                          [(first body) (rest body)]
                          [200 body])]
     `(try
-       (response (do ~@body) :status ~status)
+       (r/content-type (response (do ~@body) :status ~status)
+                       "application/json")
        (catch Exception e#
          (log/error e# "API ERROR")
          (response (or (ex-data e#) (str e#)) :status 400)))))
@@ -116,10 +117,12 @@
 
 (def app
   (routes
-    (GET "/" [] (r/resource-response "index.html" {:root "public"}))
-    (route/resources "/")
+    (GET "/" []
+      (r/redirect "/index.html"))
     api-routes
-    (route/not-found (r/resource-response "404.html" {:root "public"}))))
+    (route/resources "/")
+    (route/not-found (-> (r/resource-response "404.html" {:root "public"})
+                         (r/content-type "text/html")))))
 
 (def handler
   (-> app
@@ -128,4 +131,5 @@
       json/wrap-json-response))
 
 (defn -main [& args]
-  (run-server handler {:port 8080}))
+  (run-server handler {:port 8080})
+  (log/info "Server started"))
