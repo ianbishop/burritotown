@@ -24,34 +24,17 @@
                            "Zad1-cGu7kaKbxfUG8AO8bWJbAE"
                            "29MHABVcD9r6Y8SEfhsR_m00G_wpd8kG"
                            "H0_wVL_mo0T86jDwq90l2ywFqYo"))
-(defn large->small
-  [v1 pop1 v2 pop2]
-  (let [inside (* (/ pop1 pop2)
-                  (Math/pow Math/E (* Math/E v2)))]
-    (- v1 (long (if (zero? inside) 0 (Math/log inside))))))
-
-(defn small->large
-  [v1 pop1 v2 pop2]
-  (let [inside (* (/ pop1 pop2)
-                  (Math/pow (double v2) Math/E))]
-    (- v1 (long (/ (if (zero? inside) 0 (Math/log inside))
-                   Math/E)))))
-
-
 (defn city-comp
   [city1 pop1 city2 pop2]
-  (let [eq (if (> pop1 pop2)
-             large->small
-             small->large)]
-    (->> (reduce-kv (fn [a label value]
-                      (let [value (or value 0)
-                            other-val (or (get city2 label) 0)]
-                        (conj a [label (eq value pop1 other-val pop2)])))
-                    [] city1)
-         (sort-by second)
-         reverse
-         (map first)
-         (take 5))))
+  (->> (reduce-kv (fn [a label value]
+                    (let [value (or value 0)
+                          other-val (or (get city2 label) 0)]
+                      (conj a [label (- (/ value pop1) (/ other-val pop2))])))
+                  [] city1)
+       (sort-by second)
+       reverse
+       (map first)
+       (take 5)))
 
 (defn cats-for-city
   [city categories]
