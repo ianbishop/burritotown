@@ -31,7 +31,7 @@
           <input name="updateButton" 
                  type="button" 
                  value="New Data" 
-                 onclick="updateData()" />
+                 onclick="updateAll()" />
         </div>
     </section>
 
@@ -45,10 +45,6 @@
       var capIndexData = [3, 22, 31, 17];
       var dataset = [ 5, 19, 21, 25, 22, 18, 15, 13,
                      11];
-      var capIndexSVG = d3.select("body")
-                          .append("svg")
-                          .attr("width", width)
-                          .attr("height", thinHeight);
       var svgRow = d3.select("body")
                   .append("svg")
                   .attr("width", width)
@@ -70,38 +66,80 @@
                     "q9-11": "rgb(26,152,80)",
                     "q10-11": "rgb(0,104,55)"}
 
-      var colorCapIndex = d3.scale.quantize()
-                .domain([0, d3.max(capIndexData)])
+      function thinRow(svgElement, elementData) {
+        var elementWidth = width / elementData.length - barPadding
+        var colorCapIndex = d3.scale.quantize()
+                .domain([0, d3.max(elementData)])
                 .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
-      var capIndexWidth = width / capIndexData.length - barPadding
-      capIndexSVG.selectAll("rect")
-                 .data(capIndexData)
-                 .enter()
-                 .append("rect")
-                 .attr("x", function(d, i) {
-                  return i * width / capIndexData.length;
-                 })
-                 .attr("width", capIndexWidth)
-                 .attr("height", thinHeight)
-                 .attr("fill", function(d) {
-                  return colorscale[colorCapIndex(d)];
-                 });
-      capIndexSVG.selectAll("text")
-                 .data(capIndexData)
-                 .enter()
-                 .append("text")
-                 .text(function(d) {
-                  return d;
-                 })
-                 .attr("x", function(d, i) {
-                  return i * (width / capIndexData.length) + (width / capIndexData.length - barPadding) / 2;
-                 })
-                 .attr("y", function(d) {
-                  return thinHeight / 2 + 10;
-                 })
-                 .attr("font-size", "25px")
-                 .attr("fill", "white")
-                 .attr("text-anchor", "middle");
+        svgElement.selectAll("rect")
+           .data(elementData)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+            return i * width / elementData.length;
+           })
+           .attr("width", elementWidth)
+           .attr("height", thinHeight)
+           .attr("fill", function(d) {
+            return colorscale[colorCapIndex(d)];
+           });
+
+        svgElement.selectAll("text")
+           .data(elementData)
+           .enter()
+           .append("text")
+           .text(function(d) {
+            return d;
+           })
+           .attr("x", function(d, i) {
+            return i * (width / elementData.length) + (width / elementData.length - barPadding) / 2;
+           })
+           .attr("y", function(d) {
+            return thinHeight / 2 + 10;
+           })
+           .attr("font-size", "25px")
+           .attr("fill", "white")
+           .attr("text-anchor", "middle");
+      }
+
+      var fullWidthData = {min: 20, max: 70, value: 37};
+      var fullWidthHeight = 20;
+      function fullWidth(svgElement, elementData) {
+        var elementWidth = width - barPadding;
+        svgElement.append("rect")
+           .attr("width", elementWidth)
+           .attr("height", 3)
+           .attr("y", fullWidthHeight / 2 - 1);
+        function proportion() {
+            var range = elementData.max - elementData.min;
+            var diff = elementData.value - elementData.min;
+            var percent = diff / range;
+            return percent * elementWidth;
+          }
+        svgElement.append("line")
+          .attr("x1", proportion())
+          .attr("x2", proportion())
+          .attr("y1", 0)
+          .attr("y2", fullWidthHeight)
+          .attr("stroke", "black")
+          .attr("stroke-width", "4");
+      }
+      var svgFull = d3.select("body")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", fullWidthHeight);
+      fullWidth(svgFull, fullWidthData);
+
+      numRows = 5
+      var svgArray = []
+      for (var i = 0; i < numRows; i++) {
+        var svg = d3.select("body")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", thinHeight);
+        thinRow(svg, capIndexData);
+        svgArray.push(svg);
+      }
 
       var sideLength = width / dataset.length - barPadding
       svgRow.selectAll("rect")
@@ -134,30 +172,37 @@
          .attr("fill", "white")
          .attr("text-anchor", "middle");
 
-    function updateData() {
+    function updateData(svgElement) {
       var numValues = capIndexData.length;
-      capIndexData = [];                         //Initialize empty array
+      newData = [];                         //Initialize empty array
       for (var i = 0; i < numValues; i++) {
         var newNumber = Math.floor(Math.random() * 50);
-        capIndexData.push(newNumber);         //Add new number to array
+        newData.push(newNumber);         //Add new number to array
       }
       var colorCapIndex = d3.scale.quantize()
-                .domain([0, d3.max(capIndexData)])
+                .domain([0, d3.max(newData)])
                 .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
-      capIndexSVG.selectAll("rect")
-                 .data(capIndexData)
+      svgElement.selectAll("rect")
+                 .data(newData)
                  .transition()
                  .duration(500)
                  .attr("fill", function(d) {
                   return colorscale[colorCapIndex(d)];
                  });
-      capIndexSVG.selectAll("text")
-                 .data(capIndexData)
+      svgElement.selectAll("text")
+                 .data(newData)
                  .text(function(d) {
                   return d;
                  })
                  .attr("text-anchor", "middle");
 
+    }
+
+    function updateAll() {
+      var svgLength = svgArray.length;
+      for (var i = 0; i < svgLength; i++) {
+        updateData(svgArray[i]);
+      }
     }
     </script>
 
