@@ -318,7 +318,7 @@
    :poolhalls "Pool Halls"})
 
 (def categories
-  {:restaurants restaurants
+  {:restaurant restaurants
    :shopping shopping
    :food food
    :local local
