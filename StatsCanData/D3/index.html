@@ -122,7 +122,7 @@
             return thinHeight / 2 + 10;
            })
            .attr("font-size", "25px")
-           .attr("fill", "white")
+           .attr("fill", "black")
            .attr("text-anchor", "middle");
 
         svgElement.append("text")
@@ -135,6 +135,18 @@
           .attr("text-anchor", "middle")
           .attr("fill", "black");
       }
+
+      var svgArray = []
+      var cities = ['Fredericton', 'Toronto', 'Calgary', 'Vancouver']
+      for (var i = 0; i < cities.length; i++) {
+        var svg = d3.select("body")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", thinHeight);
+        thinRow(svg, capIndexData, cities[i]);
+        svgArray.push(svg);
+      }
+
 
       var fullWidthData = {min: 20, max: 70, value: 37};
       var fullWidthHeight = 30;
@@ -176,17 +188,6 @@
                           .attr("width", width)
                           .attr("height", fullWidthHeight);
       fullWidth(svgFull, fullWidthData);
-
-      numRows = 5
-      var svgArray = []
-      for (var i = 0; i < numRows; i++) {
-        var svg = d3.select("body")
-                          .append("svg")
-                          .attr("width", width)
-                          .attr("height", thinHeight);
-        thinRow(svg, capIndexData, "Fredericton");
-        svgArray.push(svg);
-      }
 
       var sideLength = width / dataset.length - barPadding
       svgRow.selectAll("rect")
