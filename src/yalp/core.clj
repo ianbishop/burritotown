@@ -24,14 +24,16 @@
                            "H0_wVL_mo0T86jDwq90l2ywFqYo"))
 (defn large->small
   [v1 pop1 v2 pop2]
-  (- v1 (long (Math/log (* (/ pop1 pop2)
-                           (Math/pow Math/E (* Math/E v2)))))))
+  (let [inside (* (/ pop1 pop2)
+                  (Math/pow Math/E (* Math/E v2)))]
+    (- v1 (long (if (zero? inside) 0 (Math/log inside))))))
 
 (defn small->large
   [v1 pop1 v2 pop2]
-  (- v1 (long (/ (Math/log (* (/ pop1 pop2)
-                              (Math/pow (double v2) Math/E)))
-                 Math/E))))
+  (let [inside (* (/ pop1 pop2)
+                  (Math/pow (double v2) Math/E))]
+    (- v1 (long (/ (if (zero? inside) 0 (Math/log inside))
+                   Math/E)))))
 
 
 (defn city-comp
@@ -103,7 +105,7 @@
       (GET "/compare/:category/:other" [category other]
         (found [_ (get cities city)]
           (found [_ (get cities other)]
-            (found [subcats (get categories category)]
+            (found [subcats (get categories (keyword category))]
               (if-let [cached (get @cache (format "%s/compare/%s/%s" city category other))]
                 (json-wrapper cached)
                 (let [c1 (cats-for-city city subcats)
@@ -117,8 +119,6 @@
 
 (def app
   (routes
-    (GET "/" []
-      (r/redirect "/index.html"))
     api-routes
     (route/resources "/")
     (route/not-found (-> (r/resource-response "404.html" {:root "public"})
