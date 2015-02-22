@@ -1,3 +1,6 @@
+$(document).ready(function() {
+});
+
 function getSimilars(city) {
     $("#compare-to >").remove();
     var path = "/city/" + city + "/similar";
@@ -9,9 +12,6 @@ function getSimilars(city) {
             $("<option>" + v + "</option>").appendTo("#compare-to");
         });
     });
-}
-
-function selectCategory() {
 }
 
 $("#city-picker #submit").click(function(e) {
