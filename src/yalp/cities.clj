@@ -1,15 +1,9 @@
 (ns yalp.cities)
 
 (def cities
-  {"Abbotsford" {:age 38
-                 :population 149855
-                 :income 26710}
-   "Barrie" {:age 38
-             :population 166634
-             :income 33140}
-   "Belleville" {:age 41
-                 :population 63985
-                 :income 28320}
+  {"Abbotsford" {:age 38 :population 149855 :income 26710}
+   "Barrie" {:age 38 :population 166634 :income 33140}
+   "Belleville" {:age 41 :population 63985 :income 28320}
    "Brandon" {:age 37
               :population 46061
               :income 31000}
@@ -220,14 +214,14 @@
                 (Math/pow (- (:population x) (:population y)) 2)
                 (Math/pow (- (:income x) (:income y)) 2))))
 
-(reduce-kv (fn [a k v]
-             (let [distances (reduce-kv (fn [a2 k2 v2]
-                                          (assoc a2 k2 (dist v v2)))
-                                        {} cities)
-                   distances (into (sorted-map-by (fn [k1 k2]
-                                                    (compare [(get distances k1) k1]
-                                                             [(get distances k2) k2])))
-                                   distances)]
-               (assoc a k (mapv first (rest (take 4 (seq distances)))))))
-           {}
-           cities)
+(defn similar
+  [city]
+  (let [v (get cities city)
+        distances (reduce-kv (fn [a2 k2 v2]
+                               (assoc a2 k2 (dist v v2)))
+                             {} cities)
+        distances (into (sorted-map-by (fn [k1 k2]
+                                         (compare [(get distances k1) k1]
+                                                  [(get distances k2) k2])))
+                        distances)]
+    (mapv first (rest (take 4 (seq distances))))))
