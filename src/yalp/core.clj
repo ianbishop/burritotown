@@ -145,6 +145,18 @@
                                   data (into {} (map (fn [k v] [k v]) headers data))]
                               (assoc a k data)))
                           {}
-                          content)]
+                          content)
+        city-data (reduce-kv (fn [a city data]
+                               (let [population (get-in cities [city :population])
+                                     data (reduce-kv (fn [a k v]
+                                                       (let [v (Integer. ^String v)]
+                                                         (assoc a k (long (* (/ v population) 100)))))
+                                                     {}
+                                                     data)]
+                                 (assoc a city data)))
+                             {}
+                             (dissoc city-data ""))]
     (run-server (handler city-data) {:port 8080}))
   (log/info "Server started"))
+
+
