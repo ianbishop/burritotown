@@ -27,36 +27,122 @@
 <body>
     <section>
         <h1>Let's do this.</h1>
+        <div id="option">
+          <input name="updateButton" 
+                 type="button" 
+                 value="New Data" 
+                 onclick="updateAll()" />
+        </div>
     </section>
 
     <script type="text/javascript">
       var margin = {top: 20, right: 40, bottom: 20, left: 30}
       var width = 960 - margin.left - margin.right,
       height = 200 - margin.top - margin.bottom;
+      thinHeight = 40
 
       var barPadding = 5;
+      var capIndexData = [3, 22, 31, 17];
       var dataset = [ 5, 19, 21, 25, 22, 18, 15, 13,
                      11];
-      var svg = d3.select("body")
+      var svgRow = d3.select("body")
                   .append("svg")
                   .attr("width", width)
                   .attr("height", height);
-      var sideLength = width / dataset.length - barPadding
+
       var color = d3.scale.quantize()
         .domain([0, d3.max(dataset)])
         .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+
       colorscale = {"q0-11": "rgb(165,0,38)",
-              "q1-11": "rgb(215,48,39)",
-              "q2-11": "rgb(244,109,67)",
-              "q3-11": "rgb(253,174,97)",
-              "q4-11": "rgb(254,224,139)",
-              "q5-11": "rgb(255,255,191)",
-              "q6-11": "rgb(217,239,139)",
-              "q7-11": "rgb(166,217,106)",
-              "q8-11": "rgb(102,189,99)",
-              "q9-11": "rgb(26,152,80)",
-              "q10-11": "rgb(0,104,55)"}
-      svg.selectAll("rect")
+                    "q1-11": "rgb(215,48,39)",
+                    "q2-11": "rgb(244,109,67)",
+                    "q3-11": "rgb(253,174,97)",
+                    "q4-11": "rgb(254,224,139)",
+                    "q5-11": "rgb(255,255,191)",
+                    "q6-11": "rgb(217,239,139)",
+                    "q7-11": "rgb(166,217,106)",
+                    "q8-11": "rgb(102,189,99)",
+                    "q9-11": "rgb(26,152,80)",
+                    "q10-11": "rgb(0,104,55)"}
+
+      function thinRow(svgElement, elementData) {
+        var elementWidth = width / elementData.length - barPadding
+        var colorCapIndex = d3.scale.quantize()
+                .domain([0, d3.max(elementData)])
+                .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+        svgElement.selectAll("rect")
+           .data(elementData)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+            return i * width / elementData.length;
+           })
+           .attr("width", elementWidth)
+           .attr("height", thinHeight)
+           .attr("fill", function(d) {
+            return colorscale[colorCapIndex(d)];
+           });
+
+        svgElement.selectAll("text")
+           .data(elementData)
+           .enter()
+           .append("text")
+           .text(function(d) {
+            return d;
+           })
+           .attr("x", function(d, i) {
+            return i * (width / elementData.length) + (width / elementData.length - barPadding) / 2;
+           })
+           .attr("y", function(d) {
+            return thinHeight / 2 + 10;
+           })
+           .attr("font-size", "25px")
+           .attr("fill", "white")
+           .attr("text-anchor", "middle");
+      }
+
+      var fullWidthData = {min: 20, max: 70, value: 37};
+      var fullWidthHeight = 20;
+      function fullWidth(svgElement, elementData) {
+        var elementWidth = width - barPadding;
+        svgElement.append("rect")
+           .attr("width", elementWidth)
+           .attr("height", 3)
+           .attr("y", fullWidthHeight / 2 - 1);
+        function proportion() {
+            var range = elementData.max - elementData.min;
+            var diff = elementData.value - elementData.min;
+            var percent = diff / range;
+            return percent * elementWidth;
+          }
+        svgElement.append("line")
+          .attr("x1", proportion())
+          .attr("x2", proportion())
+          .attr("y1", 0)
+          .attr("y2", fullWidthHeight)
+          .attr("stroke", "black")
+          .attr("stroke-width", "4");
+      }
+      var svgFull = d3.select("body")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", fullWidthHeight);
+      fullWidth(svgFull, fullWidthData);
+
+      numRows = 5
+      var svgArray = []
+      for (var i = 0; i < numRows; i++) {
+        var svg = d3.select("body")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", thinHeight);
+        thinRow(svg, capIndexData);
+        svgArray.push(svg);
+      }
+
+      var sideLength = width / dataset.length - barPadding
+      svgRow.selectAll("rect")
          .data(dataset)
          .enter()
          .append("rect")
@@ -69,7 +155,7 @@
           return colorscale[color(d)];
          });
 
-      svg.selectAll("text")
+      svgRow.selectAll("text")
          .data(dataset)
          .enter()
          .append("text")
@@ -85,6 +171,39 @@
          .attr("font-size", "50px")
          .attr("fill", "white")
          .attr("text-anchor", "middle");
+
+    function updateData(svgElement) {
+      var numValues = capIndexData.length;
+      newData = [];                         //Initialize empty array
+      for (var i = 0; i < numValues; i++) {
+        var newNumber = Math.floor(Math.random() * 50);
+        newData.push(newNumber);         //Add new number to array
+      }
+      var colorCapIndex = d3.scale.quantize()
+                .domain([0, d3.max(newData)])
+                .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+      svgElement.selectAll("rect")
+                 .data(newData)
+                 .transition()
+                 .duration(500)
+                 .attr("fill", function(d) {
+                  return colorscale[colorCapIndex(d)];
+                 });
+      svgElement.selectAll("text")
+                 .data(newData)
+                 .text(function(d) {
+                  return d;
+                 })
+                 .attr("text-anchor", "middle");
+
+    }
+
+    function updateAll() {
+      var svgLength = svgArray.length;
+      for (var i = 0; i < svgLength; i++) {
+        updateData(svgArray[i]);
+      }
+    }
     </script>
 
     </body>

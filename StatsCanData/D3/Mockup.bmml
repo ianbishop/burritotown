@@ -1,6 +1,6 @@
-<mockup version="1.0" skin="wireframe" fontFace="Balsamiq Sans" measuredW="1393" measuredH="1777" mockupW="1072" mockupH="1711">
+<mockup version="1.0" skin="wireframe" fontFace="Balsamiq Sans" measuredW="1393" measuredH="2108" mockupW="1072" mockupH="2042">
   <controls>
-    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="321" y="66" w="1072" h="1711" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="321" y="66" w="1072" h="2042" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
       <controlProperties>
         <text>A%20Web%20Page%0Ahttp%3A//</text>
       </controlProperties>
@@ -167,7 +167,7 @@
         <text>17</text>
       </controlProperties>
     </control>
-    <control controlID="38" controlTypeID="com.balsamiq.mockups::Paragraph" x="419" y="981" w="859" h="71" measuredW="275" measuredH="80" zOrder="32" locked="false" isInGroup="-1">
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Paragraph" x="419" y="974" w="859" h="71" measuredW="275" measuredH="80" zOrder="32" locked="false" isInGroup="-1">
       <controlProperties>
         <size>24</size>
         <text>Accounting%20for%20scale%2C%20we%27d%20expect%20Fredericton%20to%20be%20able%20to%20support%20up%20to%20*2%20more%20burrito%20restaurants*.</text>
@@ -198,6 +198,147 @@
     <control controlID="43" controlTypeID="com.balsamiq.mockups::Image" x="1081" y="1133" w="197" h="197" measuredW="77" measuredH="79" zOrder="37" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Title" x="419" y="1370" w="-1" h="-1" measuredW="588" measuredH="27" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>24</size>
+        <text>How%20do%20the%20demographics%20of%20Fredericton%20Compare%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::TextArea" x="774" y="1453" w="159" h="81" measuredW="200" measuredH="140" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>16777215</borderColor>
+        <size>72</size>
+        <text>45</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::Title" x="788" y="1429" w="-1" h="-1" measuredW="130" measuredH="27" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Median%20Age</text>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Canvas" x="419" y="1534" w="859" h="28" measuredW="100" measuredH="70" zOrder="41" locked="false" isInGroup="-1"/>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::VRule" x="947" y="1526" w="-1" h="44" measuredW="10" measuredH="100" zOrder="42" locked="false" isInGroup="-1"/>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::Label" x="422" y="1538" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="43" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>39</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Label" x="1259" y="1538" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="44" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>53</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Label" x="720" y="1566" w="-1" h="-1" measuredW="256" measuredH="19" zOrder="45" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>11</size>
+        <text>Compared%20to%20All%20Other%20Towns%20and%20Cities%20in%20Canada</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="__group__" x="405" y="1812" w="873" h="171" measuredW="873" measuredH="171" zOrder="46" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TextArea" x="155" y="27" w="577" h="81" measuredW="200" measuredH="140" zOrder="0" locked="false" isInGroup="61">
+          <controlProperties>
+            <align>center</align>
+            <borderColor>16777215</borderColor>
+            <size>72</size>
+            <text>72%2C000</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Title" x="267" y="0" w="359" h="-1" measuredW="166" measuredH="27" zOrder="1" locked="false" isInGroup="61">
+          <controlProperties>
+            <size>24</size>
+            <text>Median%20Income</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="116" w="873" h="28" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="61"/>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::VRule" x="641" y="108" w="-1" h="44" measuredW="10" measuredH="100" zOrder="3" locked="false" isInGroup="61"/>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="8" y="120" w="92" h="-1" measuredW="43" measuredH="21" zOrder="4" locked="false" isInGroup="61">
+          <controlProperties>
+            <text>53%2C000</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="773" y="120" w="92" h="-1" measuredW="43" measuredH="21" zOrder="5" locked="false" isInGroup="61">
+          <controlProperties>
+            <align>right</align>
+            <text>85%2C000</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="167" y="152" w="553" h="-1" measuredW="256" measuredH="19" zOrder="6" locked="false" isInGroup="61">
+          <controlProperties>
+            <align>center</align>
+            <size>11</size>
+            <text>Compared%20to%20All%20Other%20Towns%20and%20Cities%20in%20Canada</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Title" x="419" y="1645" w="-1" h="-1" measuredW="104" measuredH="23" zOrder="47" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Fredericton</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Title" x="419" y="1681" w="-1" h="-1" measuredW="68" measuredH="23" zOrder="48" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Toronto</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::Title" x="419" y="1719" w="-1" h="-1" measuredW="79" measuredH="23" zOrder="49" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Montreal</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Title" x="419" y="1758" w="-1" h="-1" measuredW="96" measuredH="23" zOrder="50" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Vancouver</text>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::Canvas" x="551" y="1640" w="172" h="32" measuredW="100" measuredH="70" zOrder="51" locked="false" isInGroup="-1"/>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::Canvas" x="739" y="1640" w="172" h="32" measuredW="100" measuredH="70" zOrder="52" locked="false" isInGroup="-1"/>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::Canvas" x="925" y="1640" w="172" h="32" measuredW="100" measuredH="70" zOrder="53" locked="false" isInGroup="-1"/>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::Canvas" x="1106" y="1640" w="172" h="32" measuredW="100" measuredH="70" zOrder="54" locked="false" isInGroup="-1"/>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::Canvas" x="551" y="1676" w="172" h="32" measuredW="100" measuredH="70" zOrder="55" locked="false" isInGroup="-1"/>
+    <control controlID="75" controlTypeID="com.balsamiq.mockups::Canvas" x="739" y="1676" w="172" h="32" measuredW="100" measuredH="70" zOrder="56" locked="false" isInGroup="-1"/>
+    <control controlID="76" controlTypeID="com.balsamiq.mockups::Canvas" x="925" y="1676" w="172" h="32" measuredW="100" measuredH="70" zOrder="57" locked="false" isInGroup="-1"/>
+    <control controlID="77" controlTypeID="com.balsamiq.mockups::Canvas" x="1106" y="1676" w="172" h="32" measuredW="100" measuredH="70" zOrder="58" locked="false" isInGroup="-1"/>
+    <control controlID="78" controlTypeID="com.balsamiq.mockups::Canvas" x="551" y="1714" w="172" h="32" measuredW="100" measuredH="70" zOrder="59" locked="false" isInGroup="-1"/>
+    <control controlID="79" controlTypeID="com.balsamiq.mockups::Canvas" x="739" y="1714" w="172" h="32" measuredW="100" measuredH="70" zOrder="60" locked="false" isInGroup="-1"/>
+    <control controlID="80" controlTypeID="com.balsamiq.mockups::Canvas" x="925" y="1714" w="172" h="32" measuredW="100" measuredH="70" zOrder="61" locked="false" isInGroup="-1"/>
+    <control controlID="81" controlTypeID="com.balsamiq.mockups::Canvas" x="1106" y="1714" w="172" h="32" measuredW="100" measuredH="70" zOrder="62" locked="false" isInGroup="-1"/>
+    <control controlID="82" controlTypeID="com.balsamiq.mockups::Canvas" x="551" y="1753" w="172" h="32" measuredW="100" measuredH="70" zOrder="63" locked="false" isInGroup="-1"/>
+    <control controlID="83" controlTypeID="com.balsamiq.mockups::Canvas" x="739" y="1753" w="172" h="32" measuredW="100" measuredH="70" zOrder="64" locked="false" isInGroup="-1"/>
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::Canvas" x="925" y="1753" w="172" h="32" measuredW="100" measuredH="70" zOrder="65" locked="false" isInGroup="-1"/>
+    <control controlID="85" controlTypeID="com.balsamiq.mockups::Canvas" x="1106" y="1753" w="172" h="32" measuredW="100" measuredH="70" zOrder="66" locked="false" isInGroup="-1"/>
+    <control controlID="86" controlTypeID="com.balsamiq.mockups::Label" x="616" y="1606" w="-1" h="-1" measuredW="37" measuredH="24" zOrder="67" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>0-24</text>
+      </controlProperties>
+    </control>
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::Label" x="802" y="1606" w="-1" h="-1" measuredW="47" measuredH="24" zOrder="68" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>25-44</text>
+      </controlProperties>
+    </control>
+    <control controlID="88" controlTypeID="com.balsamiq.mockups::Label" x="988" y="1606" w="-1" h="-1" measuredW="46" measuredH="24" zOrder="69" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>45-64</text>
+      </controlProperties>
+    </control>
+    <control controlID="89" controlTypeID="com.balsamiq.mockups::Label" x="1171" y="1606" w="-1" h="-1" measuredW="30" measuredH="24" zOrder="70" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>65+</text>
       </controlProperties>
     </control>
   </controls>
