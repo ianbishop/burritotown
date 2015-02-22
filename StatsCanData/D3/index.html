@@ -111,7 +111,8 @@
            })
           .attr("y", thinHeight / 2 + 10)
           .attr("font-size", "25px")
-          .attr("text-anchor", "middle");
+          .attr("text-anchor", "middle")
+          .attr("fill", "black");
       }
 
       var fullWidthData = {min: 20, max: 70, value: 37};
@@ -145,7 +146,8 @@
           .text(elementData.max)
           .attr("x", elementWidth - 13)
           .attr("y", fullWidthHeight)
-          .attr("font-size", "12px");
+          .attr("font-size", "12px")
+          .attr("fill", "black");
 
       }
       var svgFull = d3.select("body")
@@ -196,7 +198,8 @@
          })
          .attr("font-size", "50px")
          .attr("fill", "white")
-         .attr("text-anchor", "middle");
+         .attr("text-anchor", "middle")
+         .attr("fill", "black");
 
     function updateData(svgElement) {
       var numValues = capIndexData.length;
@@ -220,7 +223,8 @@
                  .text(function(d) {
                   return d;
                  })
-                 .attr("text-anchor", "middle");
+                 .attr("text-anchor", "middle")
+                 .attr("fill", "black");
 
     }
 
