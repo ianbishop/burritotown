@@ -57,7 +57,7 @@
 
       var color = d3.scale.quantize()
         .domain([0, d3.max(dataset)])
-        .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+        .range(d3.range(8).map(function(d) { return "q" + d + "-9"; }));
 
       // colorscale = {"q0-11": "rgb(165,0,38)",
       //               "q1-11": "rgb(215,48,39)",
@@ -70,24 +70,33 @@
       //               "q8-11": "rgb(102,189,99)",
       //               "q9-11": "rgb(26,152,80)",
       //               "q10-11": "rgb(0,104,55)"}
-      colorscale = {"q0-11": "rgb(165,0,38)",
-                    "q1-11": "rgb(215,48,39)",
-                    "q2-11": "rgb(244,109,67)",
-                    "q3-11": "rgb(253,174,97)",
-                    "q4-11": "rgb(254,224,144)",
-                    "q5-11": "rgb(255,255,191)",
-                    "q6-11": "rgb(224,243,248)",
-                    "q7-11": "rgb(171,217,233)",
-                    "q8-11": "rgb(116,173,209)",
-                    "q9-11": "rgb(69,117,180)",
-                    "q10-11": "rgb(49,54,149)"}
+      // colorscale = {"q0-11": "rgb(165,0,38)",
+      //               "q1-11": "rgb(215,48,39)",
+      //               "q2-11": "rgb(244,109,67)",
+      //               "q3-11": "rgb(253,174,97)",
+      //               "q4-11": "rgb(254,224,144)",
+      //               "q5-11": "rgb(255,255,191)",
+      //               "q6-11": "rgb(224,243,248)",
+      //               "q7-11": "rgb(171,217,233)",
+      //               "q8-11": "rgb(116,173,209)",
+      //               "q9-11": "rgb(69,117,180)",
+      //               "q10-11": "rgb(49,54,149)"}
 
-      function thinRow(svgElement, elementData, city) {
-        var textWidth = width / elementData.length - barPadding
-        var elementWidth = (width - textWidth) / elementData.length - barPadding
+      colorscale ={"q0-9": "rgb(247,251,255)",
+                  "q1-9": "rgb(222,235,247)",
+                  "q2-9": "rgb(198,219,239)",
+                  "q3-9": "rgb(158,202,225)",
+                  "q4-9": "rgb(107,174,214)",
+                  "q5-9": "rgb(66,146,198)",
+                  "q6-9": "rgb(33,113,181)",
+                  "q7-9": "rgb(8,81,156)"}
+
+      function thinRow(svgElement, elementData, city, type, fontSize) {
+        var textWidth = width / elementData.length - barPadding;
+        var elementWidth = (width - textWidth) / elementData.length - barPadding;
         var colorCapIndex = d3.scale.quantize()
                 .domain([0, d3.max(elementData)])
-                .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+                .range(d3.range(8).map(function(d) { return "q" + d + "-9"; }));
         svgElement.selectAll("rect")
            .data(elementData)
            .enter()
@@ -108,7 +117,7 @@
            .enter()
            .append("text")
            .text(function(d) {
-            return d;
+            return d + type;
            })
            .attr("x", function(d, i) {
             return textWidth + i * ((width - textWidth) / elementData.length) + ((width - textWidth) / elementData.length - barPadding) / 2;
@@ -126,26 +135,14 @@
             return ((width - textWidth) / elementData.length - barPadding) / 2 + 20;
            })
           .attr("y", thinHeight / 2 + 10)
-          .attr("font-size", "25px")
+          .attr("font-size", fontSize)
           .attr("text-anchor", "middle")
           .attr("fill", "black");
       }
 
-      function thinRowHeader(svgElement, elementData) {
-        var elementWidth = width / elementData.length - barPadding - 5
-        svgElement.selectAll("rect")
-           .data(elementData)
-           .enter()
-           .append("rect")
-           .attr("x", function(d, i) {
-            return 30 + i * width / elementData.length;
-           })
-           .attr("width", elementWidth)
-           .attr("height", thinHeight)
-           .attr("rx", 3)
-           .attr("ry", 3)
-           .attr("fill", "white");
-
+      function thinRowHeader(svgElement, elementData, offset) {
+        var textWidth = width / elementData.length - barPadding;
+        var elementWidth = (width - textWidth) / elementData.length - barPadding;
         svgElement.selectAll("text")
            .data(elementData)
            .enter()
@@ -154,7 +151,7 @@
             return d;
            })
            .attr("x", function(d, i) {
-            return 40 + i * (width / elementData.length - 7) + (width / elementData.length - barPadding) / 2 ;
+            return textWidth + i * ((width - textWidth) / elementData.length) + ((width - textWidth) / elementData.length - barPadding) / 2 ;
            })
            .attr("y", function(d) {
             return thinHeight / 2 + 10;
@@ -284,18 +281,35 @@
                       .append("svg")
                       .attr("width", width)
                       .attr("height", thinHeight);
-    headingText = ["", "0 to 24", "25 to 44", "45 to 64", "65+"]
-    thinRowHeader(svgHeader, headingText)
+    headingText = ["0 to 24", "25 to 44", "45 to 64", "65+"]
+    thinRowHeader(svgHeader, headingText, 7)
     for (var i = 0; i < cities.length; i++) {
       var svg = d3.select("body")
                         .append("svg")
                         .attr("width", width)
                         .attr("height", thinHeight);
-      thinRow(svg, capIndexData, cities[i]);
+      thinRow(svg, capIndexData, cities[i], "%", "25px");
       svgArray.push(svg);
     }
 
-    function updateData(svgElement) {
+    var svgArrayIncome = []
+    incomeData = [23, 34, 45, 56 ,67, 56, 34]
+    var svgHeaderIncome = d3.select("body")
+                      .append("svg")
+                      .attr("width", width)
+                      .attr("height", thinHeight);
+    headingText = ["$0-15", "$15-25", "$25-35", "$35-50", "$50-75", "$75-100", "$100+"]
+    thinRowHeader(svgHeaderIncome, headingText, 15)
+    for (var i = 0; i < cities.length; i++) {
+      var svgIncome = d3.select("body")
+                        .append("svg")
+                        .attr("width", width)
+                        .attr("height", thinHeight);
+      thinRow(svgIncome, incomeData = [23, 34, 45, 56 ,67, 56, 34], cities[i], "%", "15px");
+      svgArrayIncome.push(svgIncome);
+    }
+
+    function updateData(svgElement, type) {
       var numValues = capIndexData.length;
       newData = [];                         //Initialize empty array
       for (var i = 0; i < numValues; i++) {
@@ -304,7 +318,7 @@
       }
       var colorCapIndex = d3.scale.quantize()
                 .domain([0, d3.max(newData)])
-                .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+                .range(d3.range(8).map(function(d) { return "q" + d + "-9"; }));
       svgElement.selectAll("rect")
                  .data(newData)
                  .transition()
@@ -315,7 +329,7 @@
       svgElement.selectAll("text")
                  .data(newData)
                  .text(function(d) {
-                  return d;
+                  return d + type;
                  })
                  .attr("text-anchor", "middle")
                  .attr("fill", "black");
@@ -325,7 +339,7 @@
     function updateAll() {
       var svgLength = svgArray.length;
       for (var i = 0; i < svgLength; i++) {
-        updateData(svgArray[i]);
+        updateData(svgArray[i], "%");
       }
     }
     </script>
