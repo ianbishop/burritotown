@@ -65,7 +65,7 @@ function thinRow(svgElement, elementData, city, type, fontSize) {
                 return thinHeight / 2 + 10;
               })
               .attr("font-size", "25px")
-              .attr("fill", "white")
+              .attr("fill", "black")
               .attr("text-anchor", "middle");
 
     svgElement.append("text")
