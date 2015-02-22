@@ -23,16 +23,33 @@ $("#city-picker #submit").click(function(e) {
   clean();
 
   var city = $("#cities option:selected").text();
-  var majors = [city, "Vancouver", "Montreal", "Toronto"];
-  var reqs = _.map(majors, function(v) {
-    return $.getJSON("/city/" + v);
+  var comparison = $("#compare-to option:selected").text();
+
+  var d;
+
+  if (comparison === "Big Cities") {
+    d = $.Deferred();
+    d.resolve({"similar": ["Toronto", "Montreal", "Vancouver"]});
+  }
+  else if (comparison === "Similar Cities") {
+    d = $.getJSON("/city/" + city + "/similar");
+  }
+
+  d.then(function(similar) {
+    var cities = similar["similar"];
+    cities.unshift(city);
+
+    var reqs = _.map(cities, function(v) {
+      return $.getJSON("/city/" + v);
+    });
+
+    $.when.apply($, reqs).then(function() {
+      var args = Array.prototype.slice.call(arguments);
+      var cities = _.map(args, function(v) {
+        return v[0];
+      });
+      drawComparison(cities);
+    });
   });
 
-  $.when.apply($, reqs).then(function() {
-    var args = Array.prototype.slice.call(arguments);
-    var cities = _.map(args, function(v) {
-      return v[0];
-    });
-    drawComparison(cities);
-  });
 });
