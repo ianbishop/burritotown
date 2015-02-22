@@ -19,10 +19,7 @@ function clean() {
   });
 }
 
-$("#city-picker #submit").click(function(e) {
-  clean();
-
-  var city = $("#cities option:selected").text();
+function getSimilar(city) {
   var comparison = $("#compare-to option:selected").text();
 
   var d;
@@ -35,7 +32,17 @@ $("#city-picker #submit").click(function(e) {
     d = $.getJSON("/city/" + city + "/similar");
   }
 
-  d.then(function(similar) {
+  return d;
+}
+
+$("#city-picker #submit").click(function(e) {
+  clean();
+
+  var city = $("#cities option:selected").text();
+
+  var sim = getSimilar(city);
+
+  sim.then(function(similar) {
     var cities = similar["similar"];
     cities.unshift(city);
 
@@ -52,4 +59,61 @@ $("#city-picker #submit").click(function(e) {
     });
   });
 
+});
+
+$(".icon-row").children().click(function() {
+  var category = $(this).attr('id');
+
+  var city = $("#cities option:selected").text();
+
+  var sim = getSimilar(city);
+
+  sim.then(function(similar) {
+    var cities = similar["similar"];
+
+    var reqs = _.map(cities, function(v) {
+      return $.getJSON("/city/" + city + "/compare/" + category + "/" + v);
+    });
+
+    $.when.apply($, reqs).then(function() {
+      var args = Array.prototype.slice.call(arguments);
+      var citycomps = _.map(args, function(v) {
+        return v[0];
+      });
+
+      var comptainer =  $("#comparison");
+      comptainer.empty();
+
+      var tbl = $("<table>").addClass("pure-table");
+      var thead = $("<thead>");
+      var theadInside = $("<tr>");
+
+      theadInside.append($("<th>#</th>"));
+      for (var i=0; i < cities.length; i++) {
+        theadInside.append($("<th>" + cities[i] + "</th>"));
+      }
+      thead.append(theadInside);
+
+      tbl.append(thead);
+
+      var tbody = $("<tbody>");
+
+      for (i=0; i < 5; i++) {
+        var row = $("<tr>");
+        for (var j=0; j < cities.length + 1; j++) {
+          if (j == 0) {
+            row.append($("<td>" + (i + 1) + "</td>"));
+          }
+          else {
+            row.append($("<td>" + citycomps[j-1][i] + "</td>"));
+          }
+        }
+        tbody.append(row);
+      }
+
+      tbl.append(tbody);
+
+      comptainer.append(tbl);
+    });
+  });
 });
