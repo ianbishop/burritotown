@@ -79,3 +79,7 @@ h2, h3, h4, p {
 svg {
 margin-bottom: 5px;
 }
+
+.pure-table td {
+    color: white;
+}
