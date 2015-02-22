@@ -136,7 +136,7 @@
       (json/wrap-json-body {:keywords? true})
       json/wrap-json-response))
 
-(defn -main [& args]
+(defn -main [port & args]
   (let [content (with-open [rdr (io/reader "city-data.csv")]
                   (doall (csv/read-csv rdr)))
         headers (map keyword (rest (first content)))
@@ -156,5 +156,5 @@
                                  (assoc a city data)))
                              {}
                              (dissoc city-data ""))]
-    (run-server (handler city-data) {:port 5000}))
+    (run-server (handler city-data) {:port (or port 8080)}))
   (log/info "Server started"))
