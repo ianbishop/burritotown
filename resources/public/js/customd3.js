@@ -206,6 +206,10 @@ function createSvgRow(svgElement, elementData) {
 function drawComparison (cities) {
   var selectedCity = cities[0];
   var ageRangeData = {min: 31, max: 53, value: selectedCity["age"]};
+  d3.select("#agetitle")
+    .style("visibility", "visible");
+  d3.select("#incometitle")
+    .style("visibility", "visible");
 
   var svgAgeRange = d3.select("#ageBar")
                       .append("svg")
