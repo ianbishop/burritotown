@@ -13,7 +13,9 @@
              [cities :refer [cities] :as cities]
              [categories :refer [categories]]]
             [clojure.tools.logging :as log]
-            [ring.middleware.defaults :as mw])
+            [ring.middleware.defaults :as mw]
+            [clojure.java.io :as io]
+            [clojure.data.csv :as csv])
   (:gen-class))
 
 (def cache (atom {}))
@@ -89,11 +91,13 @@
          (log/error e# "API ERROR")
          (response (or (ex-data e#) (str e#)) :status 400)))))
 
-(def api-routes
+(defn api-routes
+  [city-data]
   (routes
     (context "/city/:city" [city]
       (GET "/" []
-        (found [city (get cities city)]
+        (found [city (merge (get cities city)
+                            (get city-data city))]
           (json-wrapper city)))
       (GET "/similar" []
         (found [_ (get cities city)]
@@ -117,19 +121,30 @@
                   (swap! cache assoc (format "%s/compare/%s/%s" city category other) c1c2comp)
                   (json-wrapper c1c2comp))))))))))
 
-(def app
+(defn app
+  [city-data]
   (routes
-    api-routes
+    (api-routes city-data)
     (route/resources "/")
     (route/not-found (-> (r/resource-response "404.html" {:root "public"})
                          (r/content-type "text/html")))))
 
-(def handler
-  (-> app
+(defn handler
+  [city-data]
+  (-> (app city-data)
       (mw/wrap-defaults mw/api-defaults)
       (json/wrap-json-body {:keywords? true})
       json/wrap-json-response))
 
 (defn -main [& args]
-  (run-server handler {:port 8080})
+  (let [content (with-open [rdr (io/reader "city-data.csv")]
+                  (doall (csv/read-csv rdr)))
+        headers (map keyword (rest (first content)))
+        city-data (reduce (fn [a l]
+                            (let [[k & data] l
+                                  data (into {} (map (fn [k v] [k v]) headers data))]
+                              (assoc a k data)))
+                          {}
+                          content)]
+    (run-server (handler city-data) {:port 8080}))
   (log/info "Server started"))

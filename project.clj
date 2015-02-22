@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/core.cache "0.6.4"]
                  [org.clojure/tools.logging "0.3.1"]
+                 [org.clojure/data.csv "0.1.2"]
                  [ring "1.3.2"]
                  [ring/ring-json "0.3.1"]
                  [ring/ring-defaults "0.1.4"]

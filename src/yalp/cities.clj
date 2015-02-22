@@ -14,9 +14,9 @@
    "Campbell River" {:age 42
                      :population 34514
                      :income 26550}
-   "Cape Breton - Sydney" {:age 43
-                           :population 31597
-                           :income 25470}
+   "Cape Breton" {:age 43
+                  :population 31597
+                  :income 25470}
    "Charlottetown" {:age 40
                     :population 42602
                     :income 28010}
@@ -89,7 +89,7 @@
    "Moncton" {:age 40
               :population 107086
               :income 30960}
-   "MontrÈal" {:age 39
+   "Montreal" {:age 39
                :population 3407963
                :income 30760}
    "Moose Jaw" {:age 40
@@ -107,9 +107,9 @@
 "Oshawa" {:age 38
           :population 290937
           :income 36110}
-"Ottawa - Gatineau" {:age 39
-                     :population 697267
-                     :income 40300}
+"Ottawa" {:age 39
+          :population 697267
+          :income 40300}
 "Penticton" {:age 46
              :population 36902
              :income 23200}
@@ -122,7 +122,7 @@
 "Prince George" {:age 38
                  :population 65503
                  :income 35120}
-"QuÈbec" {:age 41
+"Quebec" {:age 41
           :population 696946
           :income 33880}
 "Red Deer" {:age 35
@@ -143,9 +143,6 @@
 "Saint-Jean-sur-Richelieu" {:age 40
                             :population 83053
                             :income 31530}
-"Salaberry-de-Valleyfield" {:age 42
-                            :population 39391
-                            :income 28900}
 "Sarnia" {:age 37
           :population 79526
           :income 37070}
@@ -161,7 +158,7 @@
 "Sherbrooke" {:age 45
               :population 14062836969
               :income 29630}
-"St. Catharines - Niagara" {:age 42
+"St. Catharines" {:age 42
                             :population 309319
                             :income 26130}
 "St. John's" {:age 39
@@ -182,7 +179,7 @@
 "Toronto" {:age 38
            :population 5132794
            :income 32670}
-"Trois-RiviËres" {:age 43
+"Trois-Rivieres" {:age 43
                   :population 126460
                   :income 27680}
 "Vancouver" {:age 40
