@@ -65,7 +65,7 @@ function thinRow(svgElement, elementData, city, type, fontSize) {
                 return thinHeight / 2 + 10;
               })
               .attr("font-size", "25px")
-              .attr("fill", "black")
+              .attr("fill", "white")
               .attr("text-anchor", "middle");
 
     svgElement.append("text")
@@ -76,7 +76,7 @@ function thinRow(svgElement, elementData, city, type, fontSize) {
               .attr("y", thinHeight / 2 + 10)
               .attr("font-size", fontSize)
               .attr("text-anchor", "middle")
-              .attr("fill", "black");
+              .attr("fill", "white");
 }
 
 function thinRowHeader(svgElement, elementData, offset) {
@@ -96,7 +96,7 @@ function thinRowHeader(svgElement, elementData, offset) {
                return thinHeight / 2 + 10;
              })
              .attr("font-size", "15px")
-             .attr("fill", "black")
+             .attr("fill", "white")
              .attr("text-anchor", "middle");
 }
 
@@ -105,7 +105,8 @@ function fullWidth(svgElement, elementData, offset) {
   svgElement.append("rect")
             .attr("width", elementWidth)
             .attr("height", 2)
-            .attr("y", fullWidthHeight / 2 + 5);
+            .attr("y", fullWidthHeight / 2 + 5)
+            .attr("fill", "white");
 
   function proportion() {
     var range = elementData.max - elementData.min;
@@ -119,7 +120,7 @@ function fullWidth(svgElement, elementData, offset) {
             .attr("x2", proportion())
             .attr("y1", 15)
             .attr("y2", fullWidthHeight-5)
-            .attr("stroke", "black")
+            .attr("stroke", "white")
             .attr("stroke-width", "3")
             .attr("stroke-linecap", "round");
 
@@ -128,20 +129,21 @@ function fullWidth(svgElement, elementData, offset) {
             .attr("x", proportion() - 8)
             .attr("y", 10)
             .attr("font-size", "14px")
-            .attr("fill", "black");
+            .attr("fill", "white");
 
   svgElement.append("text")
             .text(elementData.min)
             .attr("x", 0)
             .attr("y", fullWidthHeight)
-            .attr("font-size", "12px");
+            .attr("font-size", "12px")
+            .attr("fill", "white");
 
   svgElement.append("text")
             .text(elementData.max)
             .attr("x", elementWidth - 13 - offset)
             .attr("y", fullWidthHeight)
             .attr("font-size", "12px")
-            .attr("fill", "black");
+            .attr("fill", "white");
 }
 
 function createTextRow(svgElement, elementData, fontSize, fontY) {
@@ -162,7 +164,7 @@ function createTextRow(svgElement, elementData, fontSize, fontY) {
               .attr("font-size", fontSize)
               .attr("fill", "white")
               .attr("text-anchor", "middle")
-              .attr("fill", "black");
+              .attr("fill", "white");
 }
 
 function createSvgRow(svgElement, elementData) {
@@ -198,7 +200,7 @@ function createSvgRow(svgElement, elementData) {
             .attr("font-size", "80px")
             .attr("fill", "white")
             .attr("text-anchor", "middle")
-            .attr("fill", "black");
+            .attr("fill", "white");
 }
 
 function drawComparison (cities) {
