@@ -14,13 +14,15 @@ function getSimilars(city) {
 $("#city-picker #submit").click(function(e) {
     var city = $("#cities option:selected").text();
     var majors = [city, "Vancouver", "Montreal", "Toronto"];
-    _.each(majors, function(v) {
-        var results = [];
-        var path = "/city/" + v;
-        $.getJSON(path, function(data) {
-            results.push(data);
-        }).then(function() {
-            drawComparison(results);
-        });
+    var reqs = _.map(majors, function(v) {
+      return $.getJSON("/city/" + v);
+    });
+
+    $.when.apply($, reqs).then(function() {
+      var args = Array.prototype.slice.call(arguments);
+      var cities = _.map(args, function(v) {
+        return v[0];
+      });
+      drawComparison(cities);
     });
 });
