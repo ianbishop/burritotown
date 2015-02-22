@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="keywords" value="" />
 
-    <link rel="stylesheet" href="css/layout.css" type="text/css" />
+    <link rel="stylesheet" href="css/layout.css" type="texscalet/css" />
 
     <script src="js/lib/modernizr-1.5.min.js"> </script>
     <script src="d3/d3.js" type="text/javascript" charset="utf-8" ></script>
@@ -21,6 +21,19 @@
             background-color: teal;
             margin-right: 2px;
         }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #eee;
+            shape-rendering: crispEdges;
+        }
+         
+        .axis text {
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+
     </style>
 </head>
 
@@ -33,6 +46,18 @@
                  value="New Data" 
                  onclick="updateAll()" />
         </div>
+        <h2>Per Capita Spending Comparison</h2>
+        <div id="spendingComparison"></div>
+        <br />
+        <h2>Median age compared to all other towns and cities</h2>
+        <div id="ageBar"></div>
+        <div id="ageChartHeader"></div>
+        <div id="ageChart"></div>
+        <br />
+        <h2>Median income compared to all other towns and cities</h2>
+        <div id="incomeBar"></div>
+        <div id="incomeChartHeader"></div>
+        <div id="incomeChart"></div>
     </section>
 
     <script type="text/javascript">
@@ -40,11 +65,6 @@
       var width = 960 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom;
       thinHeight = 40
-
-      var spendingData;
-      d3.csv("./data/SpendingData.csv", function(data) {
-        spendingData = data;
-      });
 
       var incomeAgeData;
       d3.csv("./data/CityData.csv", function(data) {
@@ -161,7 +181,7 @@
            .attr("text-anchor", "middle");
       }
 
-      function fullWidth(svgElement, elementData) {
+      function fullWidth(svgElement, elementData, offset) {
         var elementWidth = width - barPadding;
         svgElement.append("rect")
            .attr("width", elementWidth)
@@ -183,9 +203,9 @@
           .attr("stroke-linecap", "round");
         svgElement.append("text")
           .text(elementData.value)
-          .attr("x", proportion() - 7)
+          .attr("x", proportion() - 8)
           .attr("y", 10)
-          .attr("font-size", "12px")
+          .attr("font-size", "14px")
           .attr("fill", "black");
         svgElement.append("text")
           .text(elementData.min)
@@ -194,7 +214,7 @@
           .attr("font-size", "12px");
         svgElement.append("text")
           .text(elementData.max)
-          .attr("x", elementWidth - 13)
+          .attr("x", elementWidth - 13 - offset)
           .attr("y", fullWidthHeight)
           .attr("font-size", "12px")
           .attr("fill", "black");
@@ -261,30 +281,37 @@
 
     var cities = ['Fredericton', 'Toronto', 'Calgary', 'Vancouver']
 
-    var svgRow = d3.select("body")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
-    createSvgRow(svgRow, dataset);
+    // var svgRow = d3.select("body")
+    //         .append("svg")
+    //         .attr("width", width)
+    //         .attr("height", height);
+    // createSvgRow(svgRow, dataset);
 
-    var fullWidthData = {min: 20, max: 70, value: 37};
+    var ageRangeData = {min: 31, max: 53, value: 37};
     var fullWidthHeight = 50;
 
-    var svgFull = d3.select("body")
+    var svgAgeRange = d3.select("#ageBar")
                           .append("svg")
                           .attr("width", width)
                           .attr("height", fullWidthHeight);
-    fullWidth(svgFull, fullWidthData);
+    fullWidth(svgAgeRange, ageRangeData, 0);
+
+    var incomeRangeData = {min: 17500, max: 79720, value: 57000};
+    var svgIncomeRange = d3.select("#incomeBar")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", fullWidthHeight);
+    fullWidth(svgIncomeRange, incomeRangeData, 20);
 
     var svgArray = []
-    var svgHeader = d3.select("body")
+    var svgHeaderAge = d3.select("#ageChartHeader")
                       .append("svg")
                       .attr("width", width)
                       .attr("height", thinHeight);
     headingText = ["0 to 24", "25 to 44", "45 to 64", "65+"]
-    thinRowHeader(svgHeader, headingText, 7)
+    thinRowHeader(svgHeaderAge, headingText, 7)
     for (var i = 0; i < cities.length; i++) {
-      var svg = d3.select("body")
+      var svg = d3.select("#ageChart")
                         .append("svg")
                         .attr("width", width)
                         .attr("height", thinHeight);
@@ -294,20 +321,47 @@
 
     var svgArrayIncome = []
     incomeData = [23, 34, 45, 56 ,67, 56, 34]
-    var svgHeaderIncome = d3.select("body")
+    var svgHeaderIncome = d3.select("#incomeChartHeader")
                       .append("svg")
                       .attr("width", width)
                       .attr("height", thinHeight);
     headingText = ["$0-15", "$15-25", "$25-35", "$35-50", "$50-75", "$75-100", "$100+"]
     thinRowHeader(svgHeaderIncome, headingText, 15)
     for (var i = 0; i < cities.length; i++) {
-      var svgIncome = d3.select("body")
+      var svgIncome = d3.select("#incomeChart")
                         .append("svg")
                         .attr("width", width)
                         .attr("height", thinHeight);
       thinRow(svgIncome, incomeData = [23, 34, 45, 56 ,67, 56, 34], cities[i], "%", "15px");
       svgArrayIncome.push(svgIncome);
     }
+
+    // Spending comparison
+    var spendingData;
+      d3.csv("./data/SpendingDataT.csv", function(data) {
+        spendingData = data;
+        for (var i = 0; i < spendingData.length; i++) {
+        var svgSpending = d3.select("#spendingComparison")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", fullWidthHeight);
+        var data = spendingData[i];
+        var category = data.CATEGORY;
+        delete data.CATEGORY;
+        var plotData = {max: 0, min: 9999999, value: 9999999}
+        for (var key in data) {
+          current = Number(data[key]);
+          if (current > plotData.max) {
+            plotData.max = current;
+          }
+          if (current < plotData.min) {
+            plotData.min = current;
+          }
+        plotData.value = data["Ontario"]
+        }
+        fullWidth(svgSpending, plotData, 20);
+      }
+      });
 
     function updateData(svgElement, type) {
       var numValues = capIndexData.length;
@@ -335,6 +389,8 @@
                  .attr("fill", "black");
 
     }
+
+
 
     function updateAll() {
       var svgLength = svgArray.length;
