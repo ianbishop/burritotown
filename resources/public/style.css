@@ -38,7 +38,7 @@ div.trivia {
     margin-bottom: 2em;
 }
 
-#cities {
+#cities, #compare-to {
     width: 100%;
     font-size: 20px;
     height: 30px;
