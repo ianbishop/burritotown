@@ -41,6 +41,16 @@
       height = 200 - margin.top - margin.bottom;
       thinHeight = 40
 
+      var spendingData;
+      d3.csv("./data/SpendingData.csv", function(data) {
+        spendingData = data;
+      });
+
+      var incomeAgeData;
+      d3.csv("./data/CityData.csv", function(data) {
+        incomeAgeData = data;
+      });
+
       var barPadding = 5;
       var capIndexData = [3, 22, 31, 17];
       var dataset = [ 5, 19, 21, 25, 22, 18, 15, 13,

@@ -4,7 +4,7 @@ from pandas import DataFrame
 # import numpy as np
 
 # Load all the data
-city_income_demographics = DataFrame.from_csv("./01110004-eng.csv",
+city_income_demographics = DataFrame.from_csv("./SourceData/01110004-eng.csv",
                                               parse_dates=False)
 # Get just the 2012 data
 in_dem_2012 = city_income_demographics[city_income_demographics.index == 2012]
