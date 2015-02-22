@@ -1,6 +1,3 @@
-$(document).ready(function() {
-});
-
 function getSimilars(city) {
     $("#compare-to >").remove();
     var path = "/city/" + city + "/similar";
@@ -18,5 +15,6 @@ $("#city-picker #submit").click(function(e) {
     var city = $("#cities option:selected").text();
     var path = "/city/" + city;
     $.getJSON(path, function(data) {
-        console.log(data)});
+        drawComparison();
     console.log(path)});
+});
