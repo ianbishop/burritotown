@@ -6,6 +6,15 @@ p {
     color: #52454e;
 }
 
+body
+{
+    background: url(./img/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+}
+
 img.logo {
     display: block;
     margin-left: auto;
