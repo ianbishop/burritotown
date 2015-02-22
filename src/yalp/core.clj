@@ -156,5 +156,5 @@
                                  (assoc a city data)))
                              {}
                              (dissoc city-data ""))]
-    (run-server (handler city-data) {:port 8080}))
+    (run-server (handler city-data) {:port 5000}))
   (log/info "Server started"))
