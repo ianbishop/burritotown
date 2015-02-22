@@ -31,6 +31,7 @@ div.trivia {
 #cities {
     width: 100%;
     font-size: 20px;
+    height: 30px;
 }
 
 .pure-button-primary {
@@ -40,4 +41,10 @@ div.trivia {
     padding: 0.5em 1em;
     padding-top: 0.6em;
     font-size: 1.5em;
+}
+
+.icon-row {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
