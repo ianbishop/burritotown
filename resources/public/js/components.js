@@ -1,18 +1,23 @@
 function getSimilars(city) {
-    $("#compare-to >").remove();
     var path = "/city/" + city + "/similar";
-    _.each(["Compare To:", "Vancouver", "Montreal", "Toronto"], function(v) {
-        $("<option>" + v + "</option>").appendTo("#compare-to");
-    });
-    $.getJSON(path, function(data) {
-        var opts = _.each(data.similar, function(v) {
-            $("<option>" + v + "</option>").appendTo("#compare-to");
+    var cities = [city];
+    $.getJSON (path, function(data) {
+        _.each(data, function(v) {
+            cities.push(v.similar);
         });
-    });
+    }).then(function() {return cities});
 }
 
 $("#city-picker #submit").click(function(e) {
     var city = $("#cities option:selected").text();
+    var compareTo = $("#compare-to option:selected").text();
+    var comparisonCities;
+    switch(compareTo) {
+     case "Big Cities": comparisonCities = [city, "Vancouver", "Montreal", "Toronto"];
+     case "Similar Cities": comparisonCities = [];
+     default: console.log(compareTo);
+    }
+
     var majors = [city, "Vancouver", "Montreal", "Toronto"];
     _.each(majors, function(v) {
         var results = [];
