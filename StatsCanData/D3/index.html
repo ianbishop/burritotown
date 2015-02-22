@@ -38,7 +38,7 @@
     <script type="text/javascript">
       var margin = {top: 20, right: 40, bottom: 20, left: 30}
       var width = 960 - margin.left - margin.right,
-      height = 200 - margin.top - margin.bottom;
+      height = 300 - margin.top - margin.bottom;
       thinHeight = 40
 
       var spendingData;
@@ -53,12 +53,7 @@
 
       var barPadding = 5;
       var capIndexData = [3, 22, 31, 17];
-      var dataset = [ 5, 19, 21, 25, 22, 18, 15, 13,
-                     11];
-      var svgRow = d3.select("body")
-                  .append("svg")
-                  .attr("width", width)
-                  .attr("height", height);
+      var dataset = [ 5, 19, 21, 25];
 
       var color = d3.scale.quantize()
         .domain([0, d3.max(dataset)])
@@ -136,26 +131,45 @@
           .attr("fill", "black");
       }
 
-      var svgArray = []
-      var cities = ['Fredericton', 'Toronto', 'Calgary', 'Vancouver']
-      for (var i = 0; i < cities.length; i++) {
-        var svg = d3.select("body")
-                          .append("svg")
-                          .attr("width", width)
-                          .attr("height", thinHeight);
-        thinRow(svg, capIndexData, cities[i]);
-        svgArray.push(svg);
+      function thinRowHeader(svgElement, elementData) {
+        var elementWidth = width / elementData.length - barPadding - 5
+        svgElement.selectAll("rect")
+           .data(elementData)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+            return 30 + i * width / elementData.length;
+           })
+           .attr("width", elementWidth)
+           .attr("height", thinHeight)
+           .attr("rx", 3)
+           .attr("ry", 3)
+           .attr("fill", "white");
+
+        svgElement.selectAll("text")
+           .data(elementData)
+           .enter()
+           .append("text")
+           .text(function(d) {
+            return d;
+           })
+           .attr("x", function(d, i) {
+            return 40 + i * (width / elementData.length - 7) + (width / elementData.length - barPadding) / 2 ;
+           })
+           .attr("y", function(d) {
+            return thinHeight / 2 + 10;
+           })
+           .attr("font-size", "15px")
+           .attr("fill", "black")
+           .attr("text-anchor", "middle");
       }
 
-
-      var fullWidthData = {min: 20, max: 70, value: 37};
-      var fullWidthHeight = 30;
       function fullWidth(svgElement, elementData) {
         var elementWidth = width - barPadding;
         svgElement.append("rect")
            .attr("width", elementWidth)
            .attr("height", 2)
-           .attr("y", fullWidthHeight / 2 - 1);
+           .attr("y", fullWidthHeight / 2 + 5);
         function proportion() {
             var range = elementData.max - elementData.min;
             var diff = elementData.value - elementData.min;
@@ -165,11 +179,17 @@
         svgElement.append("line")
           .attr("x1", proportion())
           .attr("x2", proportion())
-          .attr("y1", 5)
-          .attr("y2", fullWidthHeight - 5)
+          .attr("y1", 15)
+          .attr("y2", fullWidthHeight-5)
           .attr("stroke", "black")
           .attr("stroke-width", "3")
           .attr("stroke-linecap", "round");
+        svgElement.append("text")
+          .text(elementData.value)
+          .attr("x", proportion() - 7)
+          .attr("y", 10)
+          .attr("font-size", "12px")
+          .attr("fill", "black");
         svgElement.append("text")
           .text(elementData.min)
           .attr("x", 0)
@@ -183,45 +203,97 @@
           .attr("fill", "black");
 
       }
-      var svgFull = d3.select("body")
-                          .append("svg")
-                          .attr("width", width)
-                          .attr("height", fullWidthHeight);
-      fullWidth(svgFull, fullWidthData);
 
-      var sideLength = width / dataset.length - barPadding
-      svgRow.selectAll("rect")
-         .data(dataset)
-         .enter()
-         .append("rect")
-         .attr("x", function(d, i) {
-          return i * (width / dataset.length);
-         })
-         .attr("width", sideLength)
-         .attr("height", sideLength)
-         .attr("fill", function(d) {
-          return colorscale[color(d)];
-         })
-         .attr("rx", 3)
-         .attr("ry", 3);
-
-      svgRow.selectAll("text")
-         .data(dataset)
+      function createTextRow(svgElement, elementData, fontSize, fontY) {
+        var sideLength = width / elementData.length - barPadding
+        svgElement.selectAll("text")
+         .data(elementData)
          .enter()
          .append("text")
          .text(function(d) {
           return d;
          })
          .attr("x", function(d, i) {
-          return i * (width / dataset.length) + (width / dataset.length - barPadding) / 2;
+          return i * (width / elementData.length) + (width / elementData.length - barPadding) / 2;
          })
          .attr("y", function(d) {
-          return sideLength / 2 + 20;
+          return sideLength / 2 + fontY;
          })
-         .attr("font-size", "50px")
+         .attr("font-size", fontSize)
          .attr("fill", "white")
          .attr("text-anchor", "middle")
          .attr("fill", "black");
+      }
+
+      function createSvgRow(svgElement, elementData) {
+        var sideLength = width / elementData.length - barPadding
+        svgElement.selectAll("rect")
+           .data(elementData)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+            return i * (width / elementData.length);
+           })
+           .attr("width", sideLength)
+           .attr("height", sideLength)
+           .attr("fill", function(d) {
+            return colorscale[color(d)];
+           })
+           .attr("rx", 3)
+           .attr("ry", 3);
+
+        svgElement.selectAll("text")
+           .data(elementData)
+           .enter()
+           .append("text")
+           .text(function(d) {
+            return d;
+           })
+           .attr("x", function(d, i) {
+            return i * (width / elementData.length) + (width / elementData.length - barPadding) / 2;
+           })
+           .attr("y", function(d) {
+            return sideLength / 2 + 30;
+           })
+           .attr("font-size", "80px")
+           .attr("fill", "white")
+           .attr("text-anchor", "middle")
+           .attr("fill", "black");
+      }
+
+
+    var cities = ['Fredericton', 'Toronto', 'Calgary', 'Vancouver']
+
+    var svgRow = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+    createSvgRow(svgRow, dataset);
+
+    var fullWidthData = {min: 20, max: 70, value: 37};
+    var fullWidthHeight = 50;
+
+    var svgFull = d3.select("body")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", fullWidthHeight);
+    fullWidth(svgFull, fullWidthData);
+
+    var svgArray = []
+    var svgHeader = d3.select("body")
+                      .append("svg")
+                      .attr("width", width)
+                      .attr("height", thinHeight);
+    headingText = ["", "0 to 24", "25 to 44", "45 to 64", "65+"]
+    thinRowHeader(svgHeader, headingText)
+    for (var i = 0; i < cities.length; i++) {
+      var svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", width)
+                        .attr("height", thinHeight);
+      thinRow(svg, capIndexData, cities[i]);
+      svgArray.push(svg);
+    }
 
     function updateData(svgElement) {
       var numValues = capIndexData.length;
