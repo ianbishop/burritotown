@@ -83,7 +83,9 @@
            .attr("height", thinHeight)
            .attr("fill", function(d) {
             return colorscale[colorCapIndex(d)];
-           });
+           })
+           .attr("rx", 3)
+           .attr("ry", 3);
 
         svgElement.selectAll("text")
            .data(elementData)
@@ -129,10 +131,11 @@
         svgElement.append("line")
           .attr("x1", proportion())
           .attr("x2", proportion())
-          .attr("y1", 0)
-          .attr("y2", fullWidthHeight)
+          .attr("y1", 5)
+          .attr("y2", fullWidthHeight - 5)
           .attr("stroke", "black")
-          .attr("stroke-width", "3");
+          .attr("stroke-width", "3")
+          .attr("stroke-linecap", "round");
         svgElement.append("text")
           .text(elementData.min)
           .attr("x", 0)
@@ -174,7 +177,9 @@
          .attr("height", sideLength)
          .attr("fill", function(d) {
           return colorscale[color(d)];
-         });
+         })
+         .attr("rx", 3)
+         .attr("ry", 3);
 
       svgRow.selectAll("text")
          .data(dataset)
