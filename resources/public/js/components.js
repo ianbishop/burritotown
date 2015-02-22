@@ -8,24 +8,31 @@ function getSimilars(city) {
     }).then(function() {return cities});
 }
 
-$("#city-picker #submit").click(function(e) {
-    var city = $("#cities option:selected").text();
-    var compareTo = $("#compare-to option:selected").text();
-    var comparisonCities;
-    switch(compareTo) {
-     case "Big Cities": comparisonCities = [city, "Vancouver", "Montreal", "Toronto"];
-     case "Similar Cities": comparisonCities = [];
-     default: console.log(compareTo);
+function clean() {
+  var containers = ["incomeBar", "incomeChartHeader", "incomeChart",
+                    "ageBar", "ageChartHeader", "ageChart"];
+  _.each(containers, function(k) {
+    var selector = "#" + k;
+    if ($(selector).children().length > 0) {
+      $(selector).empty();
     }
+  });
+}
 
-    var majors = [city, "Vancouver", "Montreal", "Toronto"];
-    _.each(majors, function(v) {
-        var results = [];
-        var path = "/city/" + v;
-        $.getJSON(path, function(data) {
-            results.push(data);
-        }).then(function() {
-            drawComparison(results);
-        });
+$("#city-picker #submit").click(function(e) {
+  clean();
+
+  var city = $("#cities option:selected").text();
+  var majors = [city, "Vancouver", "Montreal", "Toronto"];
+  var reqs = _.map(majors, function(v) {
+    return $.getJSON("/city/" + v);
+  });
+
+  $.when.apply($, reqs).then(function() {
+    var args = Array.prototype.slice.call(arguments);
+    var cities = _.map(args, function(v) {
+      return v[0];
     });
+    drawComparison(cities);
+  });
 });
