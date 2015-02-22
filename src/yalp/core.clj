@@ -158,5 +158,3 @@
                              (dissoc city-data ""))]
     (run-server (handler city-data) {:port 8080}))
   (log/info "Server started"))
-
-
