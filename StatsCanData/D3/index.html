@@ -27,36 +27,84 @@
 <body>
     <section>
         <h1>Let's do this.</h1>
+        <div id="option">
+          <input name="updateButton" 
+                 type="button" 
+                 value="New Data" 
+                 onclick="updateData()" />
+        </div>
     </section>
 
     <script type="text/javascript">
       var margin = {top: 20, right: 40, bottom: 20, left: 30}
       var width = 960 - margin.left - margin.right,
       height = 200 - margin.top - margin.bottom;
+      thinHeight = 40
 
       var barPadding = 5;
+      var capIndexData = [3, 22, 31, 17];
       var dataset = [ 5, 19, 21, 25, 22, 18, 15, 13,
                      11];
-      var svg = d3.select("body")
+      var capIndexSVG = d3.select("body")
+                          .append("svg")
+                          .attr("width", width)
+                          .attr("height", thinHeight);
+      var svgRow = d3.select("body")
                   .append("svg")
                   .attr("width", width)
                   .attr("height", height);
-      var sideLength = width / dataset.length - barPadding
+
       var color = d3.scale.quantize()
         .domain([0, d3.max(dataset)])
         .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+
       colorscale = {"q0-11": "rgb(165,0,38)",
-              "q1-11": "rgb(215,48,39)",
-              "q2-11": "rgb(244,109,67)",
-              "q3-11": "rgb(253,174,97)",
-              "q4-11": "rgb(254,224,139)",
-              "q5-11": "rgb(255,255,191)",
-              "q6-11": "rgb(217,239,139)",
-              "q7-11": "rgb(166,217,106)",
-              "q8-11": "rgb(102,189,99)",
-              "q9-11": "rgb(26,152,80)",
-              "q10-11": "rgb(0,104,55)"}
-      svg.selectAll("rect")
+                    "q1-11": "rgb(215,48,39)",
+                    "q2-11": "rgb(244,109,67)",
+                    "q3-11": "rgb(253,174,97)",
+                    "q4-11": "rgb(254,224,139)",
+                    "q5-11": "rgb(255,255,191)",
+                    "q6-11": "rgb(217,239,139)",
+                    "q7-11": "rgb(166,217,106)",
+                    "q8-11": "rgb(102,189,99)",
+                    "q9-11": "rgb(26,152,80)",
+                    "q10-11": "rgb(0,104,55)"}
+
+      var colorCapIndex = d3.scale.quantize()
+                .domain([0, d3.max(capIndexData)])
+                .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+      var capIndexWidth = width / capIndexData.length - barPadding
+      capIndexSVG.selectAll("rect")
+                 .data(capIndexData)
+                 .enter()
+                 .append("rect")
+                 .attr("x", function(d, i) {
+                  return i * width / capIndexData.length;
+                 })
+                 .attr("width", capIndexWidth)
+                 .attr("height", thinHeight)
+                 .attr("fill", function(d) {
+                  return colorscale[colorCapIndex(d)];
+                 });
+      capIndexSVG.selectAll("text")
+                 .data(capIndexData)
+                 .enter()
+                 .append("text")
+                 .text(function(d) {
+                  return d;
+                 })
+                 .attr("x", function(d, i) {
+                  return i * (width / capIndexData.length) + (width / capIndexData.length - barPadding) / 2;
+                 })
+                 .attr("y", function(d) {
+                  return thinHeight / 2 + 10;
+                 })
+                 .attr("font-size", "25px")
+                 .attr("fill", "white")
+                 .attr("text-anchor", "middle");
+
+      var sideLength = width / dataset.length - barPadding
+      svgRow.selectAll("rect")
          .data(dataset)
          .enter()
          .append("rect")
@@ -69,7 +117,7 @@
           return colorscale[color(d)];
          });
 
-      svg.selectAll("text")
+      svgRow.selectAll("text")
          .data(dataset)
          .enter()
          .append("text")
@@ -85,6 +133,32 @@
          .attr("font-size", "50px")
          .attr("fill", "white")
          .attr("text-anchor", "middle");
+
+    function updateData() {
+      var numValues = capIndexData.length;
+      capIndexData = [];                         //Initialize empty array
+      for (var i = 0; i < numValues; i++) {
+        var newNumber = Math.floor(Math.random() * 50);
+        capIndexData.push(newNumber);         //Add new number to array
+      }
+      var colorCapIndex = d3.scale.quantize()
+                .domain([0, d3.max(capIndexData)])
+                .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+      capIndexSVG.selectAll("rect")
+                 .data(capIndexData)
+                 .transition()
+                 .duration(500)
+                 .attr("fill", function(d) {
+                  return colorscale[colorCapIndex(d)];
+                 });
+      capIndexSVG.selectAll("text")
+                 .data(capIndexData)
+                 .text(function(d) {
+                  return d;
+                 })
+                 .attr("text-anchor", "middle");
+
+    }
     </script>
 
     </body>
